@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ! phpunit.xml
+ !
+ ! This XML configuration file is meant to run on a continous integration system,
+ ! (generates code coverage reports, runs all tests as a separate app (slower), etc)
+ !
+ ! XML configuration file for the unit testing framework "PHPUnit".
+ !
+ ! See http://phpunit.de/manual/3.6/en/appendixes.configuration.html for an
+ ! explanation of the XML configuration file.
+ !
+ ! Link: http://gist.github.com/3034294
+ !-->
+
+<!--
+ ! The attributes of the <phpunit> element can be used to configure PHPUnit's
+ ! core functionality.
+ !-->
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="true"
+         syntaxCheck="false"
+>
+
+    <!--
+     ! Enable xdebug code coverage
+     ! http://www.kraken.no/blog/2013/04/22/phpunit-speedups/
+     !-->
+     <php>
+        <ini name="xdebug.default_enable" value="1" />
+        <ini name="xdebug.enable_coverage" value="1" />
+        <ini name="xdebug.remote_autostart" value="0" />
+        <ini name="xdebug.remote_enable" value="0" />
+        <ini name="xdebug.overload_var_dump" value="0" />
+        <ini name="xdebug.show_mem_delta" value="0" />
+    </php>
+
+    <!--
+     ! The <php> element and its children can be used to configure PHP settings,
+     ! constants, and global variables. It can also be used to prepend the
+     ! include_path.
+     ! -->
+    <php>
+        <ini name="memory_limit" value="512M" />
+        <ini name="display_startup_errors" value="1" />
+        <ini name="ignore_repeated_errors" value="0" />
+        <ini name="ignore_repeated_source" value="0" />
+        <ini name="report_memleaks" value="1" />
+        <ini name="html_errors" value="0" />
+        <ini name="xmlrpc_errors" value="0" />
+        <ini name="xmlrpc_error_number" value="0" />
+        <ini name="docref_root" value=".php" />
+        <ini name="error_prepend_string" value="" />
+        <ini name="error_append_string" value="" />
+    </php>
+
+
+    <!--
+     ! The <testsuites> element and its one or more <testsuite> children can be
+     ! used to compose a test suite out of test suites and test cases.
+     !-->
+    <testsuites>
+
+        <testsuite name="HtmlExtensions">
+            <directory>./tests/src/Html</directory>
+            <directory>./tests/src/Url</directory>
+        </testsuite>
+
+    </testsuites>
+
+    <!--
+     ! The <filter> element and its children can be used to configure the
+     ! blacklist and whitelist for the code coverage reporting.
+     !-->
+    <!-- Example
+    <filter>
+        <blacklist>
+            <directory suffix=".php">vendor</directory>
+            <directory suffix=".php">src/tests</directory>
+        </blacklist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/bin</directory>
+            <directory suffix=".php">src/php</directory>
+            <exclude>
+                <directory suffix="Enum.php">src/php</directory>
+                <directory suffix="Exception.php">src/php</directory>
+                <directory suffix="Interface.php">src/php</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+     !-->
+
+    <!--
+     ! The <logging> element and its <log> children can be used to configure the
+     ! logging of the test execution.
+     !-->
+    <!-- Example
+    <logging>
+        <log type="coverage-clover" target="review/phpcov/coverage.xml" />
+        <log type="coverage-html"
+             target="review/phpcov/coverage"
+             showUncoveredFiles="true"
+             charset="UTF-8"
+             yui="true"
+             highlight="true"
+             lowUpperBound="35"
+             highLowerBound="70" />
+        <log type="coverage-php"
+             target="review/phpcov/coverage.serialized"
+             showUncoveredFiles="true" />
+        <log type="coverage-text"
+             target="review/phpcov/coverage.txt"
+             showUncoveredFiles="true" />
+        <log type="json" target="review/phpunit/phpunit.json" />
+        <log type="junit"
+             target="review/phpunit/junit.xml"
+             logIncompleteSkipped="true" />
+        <log type="tap" target="review/phpunit/phpunit.tap" />
+        <log type="testdox-html" target="review/phpunit/testdox.html" />
+        <log type="testdox-text" target="review/phpunit/testdox.txt" />
+    </logging>
+      !-->
+
+    <!--
+     ! The <selenium> element and its <browser> children can be used configure a
+     ! list of Selenium RC servers.
+     !-->
+    <!-- Example
+    <selenium>
+        <browser name="Mozilla Firefox"
+                 browser="*firefox"
+                 host="127.0.0.1"
+                 port="4444"
+                 timeout="30" />
+        <browser name="Google Chrome"
+                 browser="*chrome"
+                 host="127.0.0.1"
+                 port="4444"
+                 timeout="30" />
+        <browser name="Internet Explorer"
+                 browser="*iexplore"
+                 host="127.0.0.1"
+                 port="4444"
+                 timeout="30" />
+    </selenium>
+     !-->
+
+</phpunit>
