@@ -29,7 +29,7 @@ interface ModelWithExternalStorageInterface {
     public static function getStorageDriverInstance();
 
     /**
-     * Sets the model external content
+     * Sets the model external content, and also syncs the md5 field automatically
      *
      * @param string $string
      *
@@ -49,7 +49,7 @@ interface ModelWithExternalStorageInterface {
      *
      * @return boolean
      */
-    public function hasContent();
+    public function hasInMemoryContent();
 
     /**
      * Returns the storage path
@@ -65,5 +65,21 @@ interface ModelWithExternalStorageInterface {
      * @return self
      */
     public function setPath($path);
+
+    /**
+     * Fills the content_md5 field with the current content's md5
+     *
+     * @return self
+     */
+    public function syncContentMD5();
+
+
+    /**
+     * Determines whether the current (in memory, not stored) content matches the current md5 signature
+     *
+     * @return boolean
+     */
+    public function doesMD5MatchInMemoryContent();
+
 
 }

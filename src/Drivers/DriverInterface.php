@@ -27,7 +27,7 @@ interface DriverInterface {
      * Stores external content for the given model
      *
      * @param  string  $content  content to store
-     * @return string with the stored path
+     * @return array with the stored path, binary md5
      */
     public function store($content);
 

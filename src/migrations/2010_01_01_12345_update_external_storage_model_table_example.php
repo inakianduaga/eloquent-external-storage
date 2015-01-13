@@ -17,8 +17,8 @@ class UpdateExternalStorageModelTableExample extends Migration {
     {
         Schema::table('external_storage_model_table', function(Blueprint $table)
         {
-            $table->string('binary_path');
-            $table->string('binary_md5', 32);
+            $table->string('content_path')->nullable();
+            $table->string('content_md5', 32)->nullable();
         });
 
     }

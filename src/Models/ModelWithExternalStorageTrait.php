@@ -22,12 +22,15 @@ trait ModelWithExternalStorageTrait
     protected static $storageDriverConfigPath;
 
     /**
-     * Under what db field the path is stored for this model
+     * Under what db field we store the content path/md5 for this model
      * Can be overriden by the actual model implementation
      *
      * @var string
      */
-    protected $binaryPathDBField = 'binary_path';
+    protected $databaseFields = array(
+        'contentPath' => 'content_path',
+        'contentMD5' => 'content_md5',
+    );
 
 
     // ---------------
@@ -71,9 +74,15 @@ trait ModelWithExternalStorageTrait
          *  - Before creating the attachment, if the content is previously set, we will store it and update the path
          */
         App::make(static::class)->creating(function (Model $model) use ($storageDriver) {
-            if ($model->hasContent()) {
+            if ($model->hasInMemoryContent()) {
+
+                //Set the stored content's path
                 $storagePath = $storageDriver->store($model->getContent());
                 $model->setPath($storagePath);
+
+                //Just in case somebody set the md5 manually to a wrong value, we resync it
+                $model->syncContentMD5();
+
             }
         });
 
@@ -81,12 +90,16 @@ trait ModelWithExternalStorageTrait
          * Updating event
          *
          *  - Before running a model update, if the content is previously set, we will run an update
-         *  - TODO: IMPROVE THIS TO ACTUALLY SAVE CONTENT ONLY WHEN CONTENT HAS CHANGED
          */
-        App::make(static::class)->creating(function (Model $model) use ($storageDriver) {
-            if ($model->hasContent()) {
+        App::make(static::class)->updating(function (Model $model) use ($storageDriver) {
+            if ($model->hasInMemoryContent() && $model->doesMD5MatchInMemoryContent()) {
+
+                //Set the stored content's path
                 $storagePath = $storageDriver->store($model->getContent());
                 $model->setPath($storagePath);
+
+                //Sync new md5 value before updating
+                $model->syncContentMD5();
             }
         });
 
@@ -96,7 +109,7 @@ trait ModelWithExternalStorageTrait
          *  - Before deleting the attachment, we need to remove the contents from storage
          */
         App::make(static::class)->deleting(function (Model $model) use ($storageDriver) {
-            if ($model->hasContent()) {
+            if ($model->hasInMemoryContent()) {
                 $storageDriver->remove($model->getPath);
             }
         });
@@ -120,6 +133,8 @@ trait ModelWithExternalStorageTrait
     {
         $this->content = $string;
 
+        $this->syncContentMD5();
+
         return $this;
     }
 
@@ -134,7 +149,7 @@ trait ModelWithExternalStorageTrait
     // Public API
     // ---------------
 
-    public function hasContent()
+    public function hasInMemoryContent()
     {
         return !is_null($this->content);
     }
@@ -146,7 +161,7 @@ trait ModelWithExternalStorageTrait
      */
     public function getPath()
     {
-        return $this->{$this->binaryPathDBField};
+        return $this->{$this->databaseFields['contentPath']};
     }
 
     /**
@@ -157,9 +172,25 @@ trait ModelWithExternalStorageTrait
      */
     public function setPath($path)
     {
-        return $this->{$this->binaryPathDBField} = $path;
+        return $this->{$this->databaseFields['contentPath']} = $path;
     }
 
+
+    public function syncContentMD5()
+    {
+        if(!empty($this->content)) {
+            $this->{$this->databaseFields['contentMD5']} = md5($this->content);
+        } else {
+            $this->{$this->databaseFields['contentMD5']} = null;
+        }
+
+        return $this;
+    }
+
+    public function doesMD5MatchInMemoryContent()
+    {
+        return $this->{$this->databaseFields['contentMD5']} == md5($this->content);
+    }
 
     // ---------------------------
     // Private / Protected methods
