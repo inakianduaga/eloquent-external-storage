@@ -24,16 +24,6 @@ class File implements DriverInterface {
         $this->baseStoragePath = storage_path().DIRECTORY_SEPARATOR.$this->getConfigRelativeKey('storageSubfolder');
     }
 
-    public function generateStoragePath($content)
-    {
-        $name = md5($content);
-        $extension = $this->extensionGuesser($content);
-        $subfolder = Carbon::now()->format('Y-m');
-        $path = $subfolder.'_'.$name.'.'.$extension;
-
-        return $path;
-    }
-
     public function fetch($path) {
         return file_get_contents($this->baseStoragePath.DIRECTORY_SEPARATOR.$path);
     }
