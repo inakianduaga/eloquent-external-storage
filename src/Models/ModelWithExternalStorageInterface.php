@@ -1,5 +1,7 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Models;
 
+use InakiAnduaga\EloquentExternalStorage\DriverInterface as StorageDriver;
+
 /**
  * Requirements for a model to transparently provide external storage capabilities
  */
@@ -11,6 +13,20 @@ interface ModelWithExternalStorageInterface {
      * @return void
      */
     public static function boot();
+
+    /**
+     * Sets the storage driver configuration path and updates the
+     *
+     * @param string $path
+     */
+    public static function setStorageDriverConfigurationPath($path);
+
+    /**
+     * Returns the current used storage driver instance
+     *
+     * @return StorageDriver
+     */
+    public static function getStorageDriverInstance();
 
     /**
      * Sets the model external content

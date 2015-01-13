@@ -2,12 +2,16 @@
 
 use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface;
 use InakiAnduaga\EloquentExternalStorage\Models\ModelWithExternalStorageInterface as Model;
-use EloquentExternalStorage\Services\ExtensionGuesser;
+
 
 /**
  * File-based storage
  */
 class File implements DriverInterface {
+
+    protected $directorySeparator = DIRECTORY_SEPARATOR;
+
+    protected $configKey = 'inakianduaga/eloquent-external-storage::file';
 
     /**
      * The base filepath where emails are stored
@@ -15,16 +19,9 @@ class File implements DriverInterface {
      */
     private $baseStoragePath;
 
-    /**
-     * @var ExtensionGuesser
-     */
-    private $extensionGuesser;
+    function __construct() {
 
-    function __construct(ExtensionGuesser $extensionGuesser) {
-
-        $this->extensionGuesser = $extensionGuesser;
-
-        $this->baseStoragePath = storage_path().DIRECTORY_SEPARATOR.'model'; //TODO: Make this configurable
+        $this->baseStoragePath = storage_path().DIRECTORY_SEPARATOR.$this->getConfigRelativeKey('storageSubfolder');
     }
 
     public function generateStoragePath($content)
@@ -41,14 +38,14 @@ class File implements DriverInterface {
         return file_get_contents($this->baseStoragePath.DIRECTORY_SEPARATOR.$path);
     }
 
-    public function store(Model $model, $content)
+    public function store($content)
     {
         $relativePath = $this->generateStoragePath($content);
         $absolutePath = $this->baseStoragePath.DIRECTORY_SEPARATOR.$relativePath;
 
         file_put_contents($absolutePath, $content);
 
-        return $model->setPath($relativePath);
+        return $relativePath;
     }
 
     public function remove($path)

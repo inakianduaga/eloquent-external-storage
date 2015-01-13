@@ -26,11 +26,10 @@ interface DriverInterface {
     /**
      * Stores external content for the given model
      *
-     * @param  Model   $model
      * @param  string  $content  content to store
-     * @return Model   with the updated storage path
+     * @return string with the stored path
      */
-    public function store(Model $model, $content);
+    public function store($content);
 
     /**
      * Deletes a given resource
@@ -39,5 +38,15 @@ interface DriverInterface {
      * @return bool
      */
     public function remove($path);
+
+
+    /**
+     * Sets the key used for retrieving the driver configuration
+     *
+     * @param string $key
+     *
+     * @return self
+     */
+    public function setConfigKey($key);
 
 } 
