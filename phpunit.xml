@@ -68,9 +68,8 @@
      !-->
     <testsuites>
 
-        <testsuite name="HtmlExtensions">
-            <directory>./tests/src/Html</directory>
-            <directory>./tests/src/Url</directory>
+        <testsuite name="EloquentExternalStorage">
+            <directory>./tests/src/Drivers</directory>
         </testsuite>
 
     </testsuites>
