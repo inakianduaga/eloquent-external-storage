@@ -38,8 +38,6 @@ trait ModelWithExternalStorageTrait
     // ---------------
 
     /**
-     * The storageDriver service
-     *
      * @var StorageDriver
      */
     protected static $storageDriver;
@@ -66,18 +64,16 @@ trait ModelWithExternalStorageTrait
 
         static::injectStorageDriver();
 
-        $storageDriver = static::$storageDriver;
-
         /**
          * Creating Event
          *
          *  - Before creating the attachment, if the content is previously set, we will store it and update the path
          */
-        App::make(static::class)->creating(function (Model $model) use ($storageDriver) {
+        App::make(static::class)->creating(function (Model $model) {
             if ($model->hasInMemoryContent()) {
 
                 //Set the stored content's path
-                $storagePath = $storageDriver->store($model->getContent());
+                $storagePath = $model->getStorageDriverInstance()->store($model->getContent());
                 $model->setPath($storagePath);
 
                 //Just in case somebody set the md5 manually to a wrong value, we resync it
@@ -91,11 +87,11 @@ trait ModelWithExternalStorageTrait
          *
          *  - Before running a model update, if the content is previously set, we will run an update
          */
-        App::make(static::class)->updating(function (Model $model) use ($storageDriver) {
+        App::make(static::class)->updating(function (Model $model) {
             if ($model->hasInMemoryContent() && $model->doesMD5MatchInMemoryContent()) {
 
                 //Set the stored content's path
-                $storagePath = $storageDriver->store($model->getContent());
+                $storagePath = $model->getStorageDriverInstance()->store($model->getContent());
                 $model->setPath($storagePath);
 
                 //Sync new md5 value before updating
@@ -190,6 +186,18 @@ trait ModelWithExternalStorageTrait
     public function doesMD5MatchInMemoryContent()
     {
         return $this->{$this->databaseFields['contentMD5']} == md5($this->content);
+    }
+
+    // ---------------------------
+
+    public static function setStorageDriver(StorageDriver $driver, $storageDriverConfigurationPath = null)
+    {
+        static::$storageDriver = $driver;
+
+        if(!empty($storageDriverConfigurationPath)) {
+            static::setStorageDriverConfigurationPath($storageDriverConfigurationPath);
+            static::$storageDriver->setConfigKey(static::$storageDriverConfigPath);
+        }
     }
 
     // ---------------------------

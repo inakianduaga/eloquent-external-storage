@@ -15,6 +15,16 @@ interface ModelWithExternalStorageInterface {
     public static function boot();
 
     /**
+     * Sets the storage driver used by this model (class-level)
+     *
+     * @param StorageDriver $driver
+     * @param null          $storageDriverConfigurationPath
+     *
+     * @return self
+     */
+    public static function setStorageDriver(StorageDriver $driver, $storageDriverConfigurationPath = null);
+
+    /**
      * Sets the storage driver configuration path and updates the
      *
      * @param string $path
