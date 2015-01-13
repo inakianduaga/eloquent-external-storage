@@ -1,14 +1,9 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
 
 use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface;
-use InakiAnduaga\EloquentExternalStorage\Models\ModelWithExternalStorageInterface as Model;
-
-use Illuminate\Support\Facades\Config;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
-
-use Carbon\Carbon;
 
 /**
  * Aws S3 storage implementation
@@ -32,15 +27,11 @@ class AwsS3 extends AbstractDriver {
     private $s3;
 
     /**
-     * The S3 base object path where emails are stored
-     * @var string
-     */
-    private $baseStoragePath = 'Model/'; //TODO: refactor
-
-    /**
      * @param S3Client $s3Client
      */
     function __construct(S3Client $s3Client) {
+
+        parent::__construct();
 
         $this->s3Client = $s3Client;
 
@@ -90,7 +81,7 @@ class AwsS3 extends AbstractDriver {
     public function store($content)
     {
         $relativePath = $this->generateStoragePath($content);
-        $absolutePath = $this->baseStoragePath.$relativePath;
+        $absolutePath = $this->getConfigRelativeKey('s3BucketSubfolder').$relativePath;
 
         // Note: The S3 doesS3ObjectExist method has a problem when the object doesn't exist within the sdk, so we skip this check for now
         // if(! $this->doesS3ObjectExist($this->getConfigRelativeKey('s3Bucket'),, $absolutePath)) {

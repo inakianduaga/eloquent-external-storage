@@ -13,25 +13,14 @@ class File implements DriverInterface {
 
     protected $configKey = 'inakianduaga/eloquent-external-storage::file';
 
-    /**
-     * The base filepath where emails are stored
-     * @var string
-     */
-    private $baseStoragePath;
-
-    function __construct() {
-
-        $this->baseStoragePath = storage_path().DIRECTORY_SEPARATOR.$this->getConfigRelativeKey('storageSubfolder');
-    }
-
     public function fetch($path) {
-        return file_get_contents($this->baseStoragePath.DIRECTORY_SEPARATOR.$path);
+        return file_get_contents($this->getBaseStoragePath().DIRECTORY_SEPARATOR.$path);
     }
 
     public function store($content)
     {
         $relativePath = $this->generateStoragePath($content);
-        $absolutePath = $this->baseStoragePath.DIRECTORY_SEPARATOR.$relativePath;
+        $absolutePath = $this->getBaseStoragePath().DIRECTORY_SEPARATOR.$relativePath;
 
         file_put_contents($absolutePath, $content);
 
@@ -40,9 +29,19 @@ class File implements DriverInterface {
 
     public function remove($path)
     {
-        $absolutePath = $this->baseStoragePath.$path;
+        $absolutePath = $this->getBaseStoragePath().$path;
 
         unlink($absolutePath);
+    }
+
+    /**
+     * The base storage path for the stored files
+     *
+     * @return string
+     */
+    private function getBaseStoragePath()
+    {
+        return storage_path().DIRECTORY_SEPARATOR.$this->getConfigRelativeKey('storageSubfolder');
     }
 
 } 
