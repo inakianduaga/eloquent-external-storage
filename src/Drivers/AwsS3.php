@@ -2,20 +2,33 @@
 
 use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface;
 use InakiAnduaga\EloquentExternalStorage\Models\ModelWithExternalStorageInterface as Model;
-use EloquentExternalStorage\Services\ExtensionGuesser;
 
-use Aws\Laravel\AwsFacade as AWS;
+use Illuminate\Support\Facades\Config;
+
+use Aws\S3\S3Client;
+use Aws\S3\Exception\S3Exception;
+
 use Carbon\Carbon;
 
 /**
  * Aws S3 storage implementation
  */
-class AwsS3 implements DriverInterface {
+class AwsS3 extends AbstractDriver {
 
-    /** @var string */
-    private $s3Bucket;
+    protected $directorySeparator = '_';
 
-    /** var Aws\S3\S3Client */
+    protected $configKey = 'inakianduaga/eloquent-external-storage::awsS3';
+
+//    /** @var string */
+//    private $s3Bucket;
+
+    /** var S3Client */
+    private $s3Client;
+
+    /**
+     * An s3 client configured instance
+     * @var S3Client
+     */
     private $s3;
 
     /**
@@ -24,18 +37,28 @@ class AwsS3 implements DriverInterface {
      */
     private $baseStoragePath = 'Model/'; //TODO: refactor
 
-    function __construct() {
-        $this->s3Bucket = Config::get('aws::config.s3Bucket'); //TODO: refactor
-        $this->s3 = AWS::get('s3');
-    }
-    public function generateStoragePath($content)
-    {
-        $name = md5($content);
-        $extension = $this->extensionGuesser($content);
-        $subfolder = Carbon::now()->format('Y-m');
-        $path = $subfolder.'/'.$name.'.'.$extension;
+    /**
+     * @param S3Client $s3Client
+     */
+    function __construct(S3Client $s3Client) {
 
-        return $path;
+        $this->s3Client = $s3Client;
+
+        $this->initializeConfiguredS3Client();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Reinitializes the s3 client after config path has been set
+     */
+    public function setConfigKey($key)
+    {
+        $this->configKey = $key;
+
+        $this->initializeConfiguredS3Client();
+
+        return $this;
     }
 
     /**
@@ -46,7 +69,7 @@ class AwsS3 implements DriverInterface {
     public function fetch($path) {
 
         $result = $this->s3->getObject(array(
-                'Bucket' => $this->s3Bucket,
+                'Bucket' => $this->getConfigRelativeKey('s3Bucket'),
                 'Key'    => $path,
             )
         );
@@ -64,16 +87,16 @@ class AwsS3 implements DriverInterface {
      *
      * http://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpPHP.html
      */
-    public function store(Model $model, $content)
+    public function store($content)
     {
         $relativePath = $this->generateStoragePath($content);
         $absolutePath = $this->baseStoragePath.$relativePath;
 
         // Note: The S3 doesS3ObjectExist method has a problem when the object doesn't exist within the sdk, so we skip this check for now
-        // if(! $this->doesS3ObjectExist($this->s3Bucket, $absolutePath)) {
+        // if(! $this->doesS3ObjectExist($this->getConfigRelativeKey('s3Bucket'),, $absolutePath)) {
         try {
             $this->s3->putObject(array(
-                'Bucket'     => $this->s3Bucket,
+                'Bucket'     => $this->getConfigRelativeKey('s3Bucket'),
                 'Key'        => $absolutePath,
                 'Body'       => $content,
             ));
@@ -83,13 +106,13 @@ class AwsS3 implements DriverInterface {
         }
         // }
 
-        return $model->setPath($absolutePath); //TODO: refactor
+        return $absolutePath;
     }
 
     public function remove($path)
     {
         return $this->s3->deleteObject(array(
-                'Bucket' => $this->s3Bucket,
+                'Bucket' => $this->getConfigRelativeKey('s3Bucket'),
                 'Key'    => $path,
             )
         );
@@ -97,6 +120,9 @@ class AwsS3 implements DriverInterface {
 
     /**
      * Checks whether an S3 object exists
+     *
+     * @param string $bucket
+     * @param string $key
      *
      * @return bool
      * @throws S3Exception if there is a problem
@@ -110,5 +136,15 @@ class AwsS3 implements DriverInterface {
             echo "There was a problem trying to locate S3 object: $key.\n";
         }
     }
+
+    private function initializeConfiguredS3Client()
+    {
+        $this->s3 = $this->s3Client->factory(array(
+            'key'    => $this->getConfigRelativeKey('key'),
+            'secret' => $this->getConfigRelativeKey('secret'),
+            'region' => $this->getConfigRelativeKey('region'),
+        ));
+    }
+
 
 } 
