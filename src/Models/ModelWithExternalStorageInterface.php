@@ -8,13 +8,6 @@ use InakiAnduaga\EloquentExternalStorage\DriverInterface as StorageDriver;
 interface ModelWithExternalStorageInterface {
 
     /**
-     * Eloquent event registration for storing/removing binded content transparently upon model creation/deletion
-     *
-     * @return void
-     */
-    public static function boot();
-
-    /**
      * Sets the storage driver used by this model (class-level)
      *
      * @param StorageDriver $driver

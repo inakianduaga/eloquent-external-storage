@@ -1,7 +1,8 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
 
-use InakiAnduaga\EloquentExternalStorage\DriverInterface;
+use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface;
 use InakiAnduaga\EloquentExternalStorage\Services\ExtensionGuesser;
+use Illuminate\Config\Repository as ConfigService;
 use Carbon\Carbon;
 
 abstract class AbstractDriver implements DriverInterface {
@@ -10,6 +11,11 @@ abstract class AbstractDriver implements DriverInterface {
      * @var ExtensionGuesser
      */
     protected $extensionGuesser;
+
+    /**
+     * @var ConfigService
+     */
+    protected $configService;
 
     /**
      * Stores the driver's configuration key
@@ -25,10 +31,12 @@ abstract class AbstractDriver implements DriverInterface {
     protected $directorySeparator = '/';
 
     /**
-     * @param ExtensionGuesser $extensionGuesser
+     * "Inject dependencies". We retrieve them manually from the IoC container instead of auto-injecting
+     * because that way we don't need to pass the classes to the constructor on child classes
      */
-    function __construct(ExtensionGuesser $extensionGuesser) {
-        $this->extensionGuesser = $extensionGuesser;
+    function __construct() {
+        $this->extensionGuesser = app(ExtensionGuesser::class);
+        $this->configService = app(ConfigService::class);
     }
 
     public function generateStoragePath($content)
@@ -57,6 +65,6 @@ abstract class AbstractDriver implements DriverInterface {
      */
     protected function getConfigRelativeKey($key)
     {
-        return Config::get($this->configKey.'.'.$key);
+        return $this->configService->get($this->configKey.'.'.$key);
     }
 }

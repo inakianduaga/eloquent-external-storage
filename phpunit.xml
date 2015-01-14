@@ -19,9 +19,9 @@
  !-->
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="tests/bootstrap.php"
          colors="true"
          convertErrorsToExceptions="true"
+         bootstrap="tests/src/bootstrap.php"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
@@ -68,9 +68,9 @@
      !-->
     <testsuites>
 
-        <testsuite name="HtmlExtensions">
-            <directory>./tests/src/Html</directory>
-            <directory>./tests/src/Url</directory>
+        <testsuite name="Drivers">
+            <directory>./tests/src/Drivers</directory>
+            <directory>./tests/src/Models</directory>
         </testsuite>
 
     </testsuites>
@@ -85,17 +85,17 @@
             <directory suffix=".php">vendor</directory>
             <directory suffix=".php">src/tests</directory>
         </blacklist>
+    </filter>
+     !-->
+    <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/bin</directory>
-            <directory suffix=".php">src/php</directory>
+            <directory suffix=".php">src/Drivers</directory>
+            <directory suffix=".php">src/Models</directory>
+            <directory suffix=".php">src/Services</directory>
             <exclude>
-                <directory suffix="Enum.php">src/php</directory>
-                <directory suffix="Exception.php">src/php</directory>
-                <directory suffix="Interface.php">src/php</directory>
             </exclude>
         </whitelist>
     </filter>
-     !-->
 
     <!--
      ! The <logging> element and its <log> children can be used to configure the

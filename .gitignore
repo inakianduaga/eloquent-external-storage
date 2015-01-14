@@ -3,3 +3,9 @@
 .env.php
 vendor
 .idea
+
+#Coverage report
+coverage
+
+#gulp 
+gulp

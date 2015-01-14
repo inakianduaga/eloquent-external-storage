@@ -68,5 +68,16 @@ return array(
     */
     's3Bucket' => 'ZZZ',
 
+    /*
+    |--------------------------------------------------------------------------
+    | S3 bucket subfolder
+    |--------------------------------------------------------------------------
+    |
+    | The S3 "virtual subfolder" where we store the contents
+    |
+    */
+    's3BucketSubfolder' => 'ABC',
+
+
 
 );

@@ -58,7 +58,7 @@ trait ModelWithExternalStorageTrait
      *
      * @return void
      */
-    public static function boot()
+    protected static function boot()
     {
         parent::boot();
 
