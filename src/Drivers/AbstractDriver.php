@@ -1,6 +1,6 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
 
-use InakiAnduaga\EloquentExternalStorage\DriverInterface;
+use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface;
 use InakiAnduaga\EloquentExternalStorage\Services\ExtensionGuesser;
 use Illuminate\Config\Repository as ConfigService;
 use Carbon\Carbon;

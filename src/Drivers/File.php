@@ -1,13 +1,11 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
 
-use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface;
-use InakiAnduaga\EloquentExternalStorage\Models\ModelWithExternalStorageInterface as Model;
-
+use InakiAnduaga\EloquentExternalStorage\Drivers\AbstractDriver;
 
 /**
  * File-based storage
  */
-class File implements DriverInterface {
+class File extends AbstractDriver {
 
     protected $directorySeparator = DIRECTORY_SEPARATOR;
 

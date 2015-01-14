@@ -1,6 +1,6 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
 
-use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface;
+use InakiAnduaga\EloquentExternalStorage\Drivers\AbstractDriver;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
