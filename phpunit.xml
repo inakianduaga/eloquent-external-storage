@@ -19,9 +19,9 @@
  !-->
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="tests/bootstrap.php"
          colors="true"
          convertErrorsToExceptions="true"
+         bootstrap="tests/src/bootstrap.php"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
@@ -68,9 +68,9 @@
      !-->
     <testsuites>
 
-        <testsuite name="HtmlExtensions">
-            <directory>./tests/src/Html</directory>
-            <directory>./tests/src/Url</directory>
+        <testsuite name="Drivers">
+            <directory>./tests/src/Drivers</directory>
+            <directory>./tests/src/Models</directory>
         </testsuite>
 
     </testsuites>
