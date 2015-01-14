@@ -18,12 +18,12 @@
         "illuminate/database": "4.2.x",
         "illuminate/console" : "4.2.x",
         "illuminate/config" : "4.2.x",
-        "aws/aws-sdk-php" : "dev-master",
-        "orchestra/testbench" : "2.2.x"
+        "aws/aws-sdk-php" : "dev-master"
     },
     "require-dev" : {
         "phpunit/phpunit": "4.3.*@dev",
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "dev-master",
+        "orchestra/testbench" : "2.2.x"
     },
     "autoload": {
         "psr-4": {
