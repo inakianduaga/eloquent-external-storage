@@ -22,7 +22,6 @@ return array(
     |
     */
 
-    // S3 User with only read/write object permissions on tado-website bucket.
     // Remove this credentials once we have IAM credentials on the instance
 
     'key'    => 'XXX', // Your AWS Access Key ID

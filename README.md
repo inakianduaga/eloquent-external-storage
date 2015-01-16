@@ -88,3 +88,18 @@ Note that you should set the models `$storageDriverConfigPath` property to point
    - Use `setContent` method on the model to set the content (will be actually saved on update/save/creation)
    - Use `getContent` to retrieve the actual contents
 
+
+## Development & Testing
+
+### Requirements
+
+Install `node` & `npm`, afterwards run `npm install` to install development tools
+There are several commands related to testing
+
+### Tools
+
+- `gulp test` : runs unit tests once
+- `gulp tdd`  : runs unit tests continuously once changes are detected
+
+Both options have the ability to generate a code coverage report in different formats. When this is selected, a local server will be launched to visualize the coverage report
+
