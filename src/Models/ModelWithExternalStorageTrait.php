@@ -60,7 +60,6 @@ trait ModelWithExternalStorageTrait
      */
     protected static function boot()
     {
-        echo "here booting";
         parent::boot();
 
         static::injectStorageDriver();
@@ -70,7 +69,7 @@ trait ModelWithExternalStorageTrait
          *
          *  - Before creating the attachment, if the content is previously set, we will store it and update the path
          */
-        App::make(static::class)->creating(function (Model $model) {
+        static::creating(function (Model $model) {
             if ($model->hasInMemoryContent()) {
 
                 //Set the stored content's path
@@ -88,7 +87,7 @@ trait ModelWithExternalStorageTrait
          *
          *  - Before running a model update, if the content is previously set, we will run an update
          */
-        App::make(static::class)->updating(function (Model $model) {
+        static::updating(function (Model $model) {
             if ($model->hasInMemoryContent() && $model->doesMD5MatchInMemoryContent()) {
 
                 //Set the stored content's path
@@ -105,7 +104,7 @@ trait ModelWithExternalStorageTrait
          *
          *  - Before deleting the attachment, we need to remove the contents from storage
          */
-        App::make(static::class)->deleting(function (Model $model) {
+        static::deleting(function (Model $model) {
             if ($model->hasInMemoryContent()) {
                 $model->getStorageDriverInstance()->remove($model->getPath);
             }

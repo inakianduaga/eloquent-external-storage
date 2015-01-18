@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Base model table
  */
-class CreateExternalStorageModelTableExample extends Migration {
+class CreateExternalStorageModelTableTest extends Migration {
 
     /**
      * Run the migrations.

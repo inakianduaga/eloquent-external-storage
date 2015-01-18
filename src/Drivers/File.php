@@ -3,7 +3,7 @@
 use InakiAnduaga\EloquentExternalStorage\Drivers\AbstractDriver;
 
 /**
- * File-based storage
+ * File-based storage driver
  */
 class File extends AbstractDriver {
 

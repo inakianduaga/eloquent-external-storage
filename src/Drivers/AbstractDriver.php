@@ -42,7 +42,7 @@ abstract class AbstractDriver implements DriverInterface {
     public function generateStoragePath($content)
     {
         $name = md5($content);
-        $extension = $this->extensionGuesser($content);
+        $extension = $this->extensionGuesser->guess($content);
         $subfolder = Carbon::now()->format('Y-m');
         $path = $subfolder. $this->directorySeparator .$name.'.'.$extension;
 

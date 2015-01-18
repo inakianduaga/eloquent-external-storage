@@ -15,3 +15,7 @@
 */
 
 require __DIR__.'/../../vendor/autoload.php';
+
+//For some reasons the drivers folder is not added by composer automatically, so we require the files here manually
+require_once("src/Drivers/DriverInterface.php");
+require_once("src/Drivers/File.php");

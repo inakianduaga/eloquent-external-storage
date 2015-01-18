@@ -12,6 +12,7 @@ class TestModel extends BaseModel {
      *
      * @var string
      */
-    protected $table = 'testbench';
+    protected $table = 'external_storage_model_table';
 
+    protected $guarded = array('id');
 } 
