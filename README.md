@@ -93,10 +93,13 @@ Note that you should set the models `$storageDriverConfigPath` property to point
 
 ### Requirements
 
-Install `node` & `npm`, afterwards run `npm install` to install development tools
-There are several commands related to testing
+- Install `node` & `npm`, afterwards run `npm install` to install development tools
+- Install `sqlite` driver for running tests
+
+   - **Ubuntu**: `sudo apt-get install sqlite3 libsqlite3-dev` and afterwards `sudo apt-get install php5-sqlite`
 
 ### Tools
+There are several commands related to testing
 
 - `gulp test` : runs unit tests once
 - `gulp tdd`  : runs unit tests continuously once changes are detected

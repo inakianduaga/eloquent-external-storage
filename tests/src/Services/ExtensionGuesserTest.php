@@ -1,6 +1,5 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Tests\Services;
 
-use Illuminate\Support\Facades\App;
 use InakiAnduaga\EloquentExternalStorage\Tests\AbstractBaseTestCase as BaseTestCase;
 use InakiAnduaga\EloquentExternalStorage\Services\ExtensionGuesser;
 
@@ -12,10 +11,10 @@ class ExtensionGuesserTest extends BaseTestCase {
      * @var array
      */
     private $stubPaths = array(
-        'txt' => 'tests/src/Stubs/stub.txt',
-        'pdf' => 'tests/src/Stubs/stub.pdf',
-        'gif' => 'tests/src/Stubs/stub.gif',
-        'jpeg' => 'tests/src/Stubs/stub.jpg',
+        'txt' => 'tests/src/Stubs/extensions/stub.txt',
+        'pdf' => 'tests/src/Stubs/extensions/stub.pdf',
+        'gif' => 'tests/src/Stubs/extensions/stub.gif',
+        'jpeg' => 'tests/src/Stubs/extensions/stub.jpg',
     );
 
     /**
@@ -30,7 +29,7 @@ class ExtensionGuesserTest extends BaseTestCase {
     {
         parent::setUp();
 
-        $this->extensionGuesser = App::make(ExtensionGuesser::class);
+        $this->extensionGuesser = $this->app->make(ExtensionGuesser::class);
     }
 
     public function testGuess()

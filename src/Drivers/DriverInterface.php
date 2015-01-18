@@ -1,7 +1,7 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
 
 /**
- * Storage operations API
+ * Storage driver API
  */
 interface DriverInterface {
 

@@ -1,6 +1,6 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Models;
 
-use InakiAnduaga\EloquentExternalStorage\DriverInterface as StorageDriver;
+use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface as StorageDriver;
 
 /**
  * Requirements for a model to transparently provide external storage capabilities

@@ -1,7 +1,7 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Models;
 
 use Illuminate\Foundation\Application as App;
-use InakiAnduaga\EloquentExternalStorage\DriverInterface as StorageDriver;
+use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface as StorageDriver;
 use InakiAnduaga\EloquentExternalStorage\Models\ModelWithExternalStorageInterface as Model;
 
 /**
@@ -60,6 +60,7 @@ trait ModelWithExternalStorageTrait
      */
     protected static function boot()
     {
+        echo "here booting";
         parent::boot();
 
         static::injectStorageDriver();
@@ -104,9 +105,9 @@ trait ModelWithExternalStorageTrait
          *
          *  - Before deleting the attachment, we need to remove the contents from storage
          */
-        App::make(static::class)->deleting(function (Model $model) use ($storageDriver) {
+        App::make(static::class)->deleting(function (Model $model) {
             if ($model->hasInMemoryContent()) {
-                $storageDriver->remove($model->getPath);
+                $model->getStorageDriverInstance()->remove($model->getPath);
             }
         });
     }
