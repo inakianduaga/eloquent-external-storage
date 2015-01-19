@@ -8,6 +8,17 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
 
     //-- Tests --//
 
+    public function testSetStorageDriverAndGetStorageDriverInstance()
+    {
+        $fileDriver = new FileDriver();
+
+        TestModel::setStorageDriver($fileDriver);
+
+        $storageInstance = TestModel::getStorageDriverInstance();
+
+        $this->assertEquals(get_class($storageInstance), get_class($fileDriver));
+    }
+
     public function testCreateWithoutContent()
     {
         $model = $this->createModel();
@@ -26,23 +37,11 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         //Check in memory content is ok
         $this->assertEquals($content, $model->getContent());
 
-        //Fetch model from db and retrieve "cold" content
+        //Fetch fresh model from db and retrieve "cold" content
         $storedContent = TestModel::get()->first()->getContent();
 
         $this->assertEquals($storedContent, $content);
     }
-
-    public function testSetStorageDriverAndGetStorageDriverInstance()
-    {
-        $fileDriver = new FileDriver();
-
-        TestModel::setStorageDriver($fileDriver);
-
-        $storageInstance = TestModel::getStorageDriverInstance();
-
-        $this->assertEquals(get_class($storageInstance), get_class($fileDriver));
-    }
-
 
     //-- Private Methods --//
 

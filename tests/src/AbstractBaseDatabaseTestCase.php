@@ -60,6 +60,16 @@ abstract class AbstractBaseDatabaseTestCase extends AbstractBaseTestCase {
     }
 
     /**
+     * This is called after each test is finished
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        parent::tearDown();
+    }
+
+    /**
      * Define environment setup.
      *
      * @param  \Illuminate\Foundation\Application    $app
