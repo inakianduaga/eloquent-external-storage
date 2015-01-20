@@ -1,0 +1,22 @@
+# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
+language: php
+
+# list any PHP version you want to test against
+php:
+  # using major version aliases
+
+  # aliased to a recent 5.5.x version
+  - 5.5
+
+# omitting "script:" will default to phpunit
+# We create a folder where we will store the clove coverage report
+script: phpunit
+  - mkdir -p build/logs
+  - php vendor/bin/phpunit -c phpunit.xml --coverageClover build/logs/clover.xml
+
+# configure notifications (email, IRC, campfire etc)
+#notifications:
+#  irc: "irc.freenode.org#yourfavouriteroomfortravis"
+
+after_script:
+  - php vendor/bin/coveralls
