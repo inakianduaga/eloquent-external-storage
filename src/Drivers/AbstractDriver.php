@@ -64,6 +64,11 @@ abstract class AbstractDriver implements DriverInterface {
         return $this;
     }
 
+    public function getConfigKey()
+    {
+        return $this->configKey;
+    }
+
     /**
      * Returns a config key relative to the main driver configuration
      *

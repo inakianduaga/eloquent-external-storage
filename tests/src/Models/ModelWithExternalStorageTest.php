@@ -34,6 +34,35 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         $this->assertEquals(get_class($storageInstance), get_class($fileDriver));
     }
 
+    public function testUpdateStorageDriver()
+    {
+        $configKey = 'foo/bar';
+
+        //We first set a storage driver that will use default configuration, and check that config is indeed being used
+        $fileDriver = new FileDriver();
+        $configKey = $fileDriver->getConfigKey();
+        TestModel::setStorageDriver($fileDriver);
+
+        $this->assertEquals(TestModel::getStorageDriverInstance()->getConfigKey(), $configKey);
+
+        //Update configuration & driver, which should update driver configuration automatically
+        $this->mockStorageConfiguration($configKey, array('foo' => 'bar'));
+        TestModel::setStorageDriver($fileDriver);
+
+        $this->assertEquals(TestModel::getStorageDriverInstance()->getConfigKey(), $configKey);
+    }
+
+
+    public function testSetStorageDriverWithConfigPath()
+    {
+        $configKey = 'foo/bar';
+
+        $fileDriver = new FileDriver();
+        TestModel::setStorageDriver($fileDriver, $configKey);
+
+        $this->assertEquals(TestModel::getStorageDriverInstance()->getConfigKey(), $configKey);
+    }
+
     public function testCreateWithContent()
     {
         //Random string as content
@@ -51,6 +80,7 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         //Fetch fresh model from db and retrieve "cold" content
         $storedContent = TestModel::get()->first()->getContent();
 
+        //Check cold-stored content is ok
         $this->assertEquals($storedContent, $content);
     }
 

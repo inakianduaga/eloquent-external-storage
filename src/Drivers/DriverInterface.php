@@ -47,4 +47,11 @@ interface DriverInterface {
      */
     public function setConfigKey($key);
 
+    /**
+     * Retrieves the driver's instance config key
+     *
+     * @return string
+     */
+    public function getConfigKey();
+
 } 

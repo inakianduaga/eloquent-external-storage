@@ -205,7 +205,6 @@ trait ModelWithExternalStorageTrait
 
         if(!empty($storageDriverConfigurationPath)) {
             static::setStorageDriverConfigurationPath($storageDriverConfigurationPath);
-            static::$storageDriver->setConfigKey(static::$storageDriverConfigPath);
         }
     }
 
