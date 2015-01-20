@@ -80,14 +80,12 @@
      ! The <filter> element and its children can be used to configure the
      ! blacklist and whitelist for the code coverage reporting.
      !-->
-    <!-- Example
     <filter>
         <blacklist>
-            <directory suffix=".php">vendor</directory>
-            <directory suffix=".php">src/tests</directory>
+            <file>./src/Models/ModelWithExternalStorageInterface.php</file>
+            <file>./src/Models/AbstractModelWithExternalStorage.php</file>
         </blacklist>
     </filter>
-     !-->
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/Drivers</directory>
