@@ -1,4 +1,5 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
+//@codeCoverageIgnoreStart
 
 /**
  * Storage driver API
