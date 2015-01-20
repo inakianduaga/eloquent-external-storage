@@ -1,5 +1,7 @@
-<?php namespace InakiAnduaga\EloquentExternalStorage\Models;
-//@codeCoverageIgnoreStart
+<?php //@codeCoverageIgnoreStart
+
+namespace InakiAnduaga\EloquentExternalStorage\Models;
+
 
 use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface as StorageDriver;
 

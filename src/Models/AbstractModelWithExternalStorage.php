@@ -1,5 +1,6 @@
-<?php namespace InakiAnduaga\EloquentExternalStorage\Models;
-//@codeCoverageIgnoreStart
+<?php //@codeCoverageIgnoreStart
+
+namespace InakiAnduaga\EloquentExternalStorage\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
@@ -7,4 +8,4 @@ abstract class AbstractModelWithExternalStorage extends Eloquent  implements Mod
 
     use ModelWithExternalStorageTrait;
 
-} 
+}
