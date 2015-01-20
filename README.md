@@ -1,6 +1,6 @@
 # eloquent-external-storage
 
-Adds external storage to an eloquent model. 
+> Adds external storage to an eloquent model.
 
 - Storage supports different drivers, currently `file` and `Amazon AWS S3` are implemented
 - Different models can have different storage methods, configurations
