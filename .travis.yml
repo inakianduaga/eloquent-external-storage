@@ -14,7 +14,7 @@ install: composer install --dev
 # We create a folder where we will store the clove coverage report
 script:
   - mkdir -p build/logs
-  - php vendor/bin/phpunit -c phpunit.xml --coverageClover build/logs/clover.xml
+  - php vendor/bin/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
 
 # configure notifications (email, IRC, campfire etc)
 #notifications:
