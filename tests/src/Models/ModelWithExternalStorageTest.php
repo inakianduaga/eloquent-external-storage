@@ -3,8 +3,23 @@
 use InakiAnduaga\EloquentExternalStorage\Tests\AbstractBaseDatabaseTestCase;
 use InakiAnduaga\EloquentExternalStorage\Tests\Stubs\Models\TestModel;
 use InakiAnduaga\EloquentExternalStorage\Drivers\File as FileDriver;
+use Illuminate\Support\Facades\Config;
 
 class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
+
+    private $fileStorageFolderRelativeToStoragePath = 'files';
+
+    //-- Setup --//
+
+    /**
+     * Clean up file driver files after each test
+     */
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        $this->cleanupFilesInFolder(storage_path() . DIRECTORY_SEPARATOR . $this->fileStorageFolderRelativeToStoragePath);
+    }
 
     //-- Tests --//
 
@@ -19,18 +34,14 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         $this->assertEquals(get_class($storageInstance), get_class($fileDriver));
     }
 
-    public function testCreateWithoutContent()
-    {
-        $model = $this->createModel();
-
-        $this->assertEmpty($model->getContent());
-
-        //TODO: Partial mock (Spy) on fileDriver and make sure the store method hasn't been called
-    }
-
     public function testCreateWithContent()
     {
-        $content = '12345';
+        //Random string as content
+        $content = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+
+        $this->mockStorageConfiguration('mocked.config.path', array(
+            'storageSubfolder' => $this->fileStorageFolderRelativeToStoragePath
+        ));
 
         $model = $this->createModel($content);
 
@@ -43,6 +54,16 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         $this->assertEquals($storedContent, $content);
     }
 
+    public function testCreateWithoutContent()
+    {
+        $model = $this->createModel();
+
+        $this->assertEmpty($model->getContent());
+
+        //TODO: Partial mock (Spy) on fileDriver and make sure the store method hasn't been called
+    }
+
+
     //-- Private Methods --//
 
     private function createModel($content = null)
@@ -54,4 +75,30 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         return $model;
     }
 
+
+    /**
+     * @param       $path
+     * @param array $config
+     */
+    private function mockStorageConfiguration($path, array $config)
+    {
+        TestModel::setStorageDriverConfigurationPath($path);
+
+        Config::set($path, $config);
+    }
+
+    /**
+     * http://stackoverflow.com/questions/4594180/deleting-all-files-from-a-folder-using-php
+     *
+     * @param string $path
+     */
+    private function cleanupFilesInFolder($path)
+    {
+        $files = glob($path.'/*'); // get all file names
+
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
+    }
 }

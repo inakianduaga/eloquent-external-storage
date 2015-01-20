@@ -11,18 +11,20 @@ class File extends AbstractDriver {
 
     protected $configKey = 'inakianduaga/eloquent-external-storage::file';
 
+    protected $subfolderByDate = false;
+
     public function fetch($path) {
-        return file_get_contents($this->getBaseStoragePath().DIRECTORY_SEPARATOR.$path);
+        return file_get_contents($path);
     }
 
     public function store($content)
     {
         $relativePath = $this->generateStoragePath($content);
-        $absolutePath = $this->getBaseStoragePath().DIRECTORY_SEPARATOR.$relativePath;
+        $absolutePath = $this->getBaseStoragePath(). $this->directorySeparator . $relativePath;
 
         file_put_contents($absolutePath, $content);
 
-        return $relativePath;
+        return $absolutePath;
     }
 
     public function remove($path)
@@ -39,7 +41,7 @@ class File extends AbstractDriver {
      */
     private function getBaseStoragePath()
     {
-        return storage_path().DIRECTORY_SEPARATOR.$this->getConfigRelativeKey('storageSubfolder');
+        return storage_path().$this->directorySeparator.$this->getConfigRelativeKey('storageSubfolder');
     }
 
 } 

@@ -58,12 +58,29 @@ abstract class AbstractBaseTestCase extends OrchestraTestCase {
     {
         // reset base path to point to our package's src directory
         $app['path.base'] = __DIR__ . '/../..';
+
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', array(
             'driver'   => 'sqlite',
             'database' => ':memory:',
             'prefix'   => '',
         ));
+    }
+
+    /**
+     * Get application paths. Use the preset from the Orchestral package but redefine the storage path
+     *
+     * @return array
+     */
+    protected function getApplicationPaths()
+    {
+        $basePath = __DIR__ . '/../..';
+
+        $orchestralPaths = parent::getApplicationPaths();
+
+        $orchestralPaths['storage'] = "{$basePath}/tests/storage";
+
+        return $orchestralPaths;
     }
 
     /**

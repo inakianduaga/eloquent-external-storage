@@ -26,7 +26,8 @@ to install the package
 
 ### Database configuration
 
-The storage driver needs two additional fields where it stores the content path and an md5 checksum of the contents. 
+The storage driver needs three additional fields, where it stores the content path, an md5 checksum of the contents,
+and the driver class used to store the contents.
 
 - A migration example is provided under `src/migration`.
 - The database field names can be custom-named, simply modify the model's $databaseFields property
@@ -36,11 +37,12 @@ The storage driver needs two additional fields where it stores the content path 
 class ActualModel extends InakiAnduaga\EloquentExternalStorage\Models\AbstractModelWithExternalStorage {
 
     /**
-     * Under what db field we store the content path/md5 for this model
+     * Under what db field we store the content path/md5/storage_driver_class for this model
      */
     protected $databaseFields = array(
         'contentPath' => 'content_path',
         'contentMD5' => 'content_md5',
+        'storage_driver' => 'storage_driver',
     );
     
 }

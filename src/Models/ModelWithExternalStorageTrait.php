@@ -30,6 +30,7 @@ trait ModelWithExternalStorageTrait
     protected $databaseFields = array(
         'contentPath' => 'content_path',
         'contentMD5' => 'content_md5',
+        'storage_driver' => 'storage_driver',
     );
 
 
@@ -79,6 +80,8 @@ trait ModelWithExternalStorageTrait
                 //Just in case somebody set the md5 manually to a wrong value, we resync it
                 $model->syncContentMD5();
 
+                //Set the value of the storage driver class
+                $model->syncStorageDriverField();
             }
         });
 
@@ -96,6 +99,9 @@ trait ModelWithExternalStorageTrait
 
                 //Sync new md5 value before updating
                 $model->syncContentMD5();
+
+                //Set the value of the storage driver class
+                $model->syncStorageDriverField();
             }
         });
 
@@ -103,6 +109,7 @@ trait ModelWithExternalStorageTrait
          * Deleting Event
          *
          *  - Before deleting the attachment, we need to remove the contents from storage
+         *  - TODO: Clean up content path, storage driver fields upon deletion
          */
         static::deleting(function (Model $model) {
             if ($model->hasInMemoryContent()) {
@@ -114,6 +121,8 @@ trait ModelWithExternalStorageTrait
     public static function setStorageDriverConfigurationPath($path)
     {
         static::$storageDriverConfigPath = $path;
+
+        static::getStorageDriverInstance()->setConfigKey($path);
     }
 
     public static function getStorageDriverInstance()
@@ -137,7 +146,13 @@ trait ModelWithExternalStorageTrait
 
     public function getContent()
     {
-        return !empty($this->content) ? $this->content : app(StorageDriver::class)->fetch($this->getPath());
+        //If there is no in-memory content and there is no content path, the content must be null
+        //Otherwise, get content from in-memory or cold storage
+        if(!$this->hasInMemoryContent() && empty($this->getPath())) {
+            return null;
+        } else {
+            return !empty($this->content) ? $this->content : app(StorageDriver::class)->fetch($this->getPath());
+        }
     }
 
 
@@ -183,12 +198,6 @@ trait ModelWithExternalStorageTrait
         return $this;
     }
 
-    public function doesMD5MatchInMemoryContent()
-    {
-        return $this->{$this->databaseFields['contentMD5']} == md5($this->content);
-    }
-
-    // ---------------------------
 
     public static function setStorageDriver(StorageDriver $driver, $storageDriverConfigurationPath = null)
     {
@@ -198,6 +207,12 @@ trait ModelWithExternalStorageTrait
             static::setStorageDriverConfigurationPath($storageDriverConfigurationPath);
             static::$storageDriver->setConfigKey(static::$storageDriverConfigPath);
         }
+    }
+
+
+    public function syncStorageDriverField()
+    {
+        $this->{$this->databaseFields['storage_driver']} = static::getStorageDriverInstanceClass();
     }
 
     // ---------------------------
@@ -213,4 +228,24 @@ trait ModelWithExternalStorageTrait
         static::$storageDriver->setConfigKey(static::$storageDriverConfigPath);
     }
 
+    /**
+     * Determines whether the current (in memory, not stored) content matches the current md5 signature
+     *
+     * @return boolean
+     */
+    private function doesMD5MatchInMemoryContent()
+    {
+        return $this->{$this->databaseFields['contentMD5']} == md5($this->content);
+    }
+
+    /**
+     * The class name of the current storage driver
+     * @return null|string
+     */
+    private static function getStorageDriverInstanceClass()
+    {
+        $driver = static::getStorageDriverInstance();
+
+        return $driver !== null ? get_class($driver) : null;
+    }
 }

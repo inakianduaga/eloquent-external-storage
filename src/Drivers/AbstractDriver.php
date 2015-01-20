@@ -31,6 +31,12 @@ abstract class AbstractDriver implements DriverInterface {
     protected $directorySeparator = '/';
 
     /**
+     * Whether to use YYYY-MM as a subfolder for storage
+     * @var bool
+     */
+    protected $subfolderByDate = true;
+
+    /**
      * "Inject dependencies". We retrieve them manually from the IoC container instead of auto-injecting
      * because that way we don't need to pass the classes to the constructor on child classes
      */
@@ -43,8 +49,10 @@ abstract class AbstractDriver implements DriverInterface {
     {
         $name = md5($content);
         $extension = $this->extensionGuesser->guess($content);
-        $subfolder = Carbon::now()->format('Y-m');
-        $path = $subfolder. $this->directorySeparator .$name.'.'.$extension;
+
+        $subfolder = $this->subfolderByDate ? Carbon::now()->format('Y-m') . $this->directorySeparator : '';
+
+        $path = $subfolder . $name .'.' .$extension;
 
         return $path;
     }
