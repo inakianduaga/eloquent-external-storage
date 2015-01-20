@@ -1,4 +1,7 @@
-# eloquent-external-storage
+eloquent-external-storage
+=========================
+
+[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 > Adds external storage to an eloquent model.
 
@@ -108,3 +111,10 @@ There are several commands related to testing
 
 Both options have the ability to generate a code coverage report in different formats. When this is selected, a local server will be launched to visualize the coverage report
 
+
+
+[travis-url]: https://travis-ci.org/inakianduaga/eloquent-external-storage
+[travis-image]: https://travis-ci.org/inakianduaga/eloquent-external-storage.svg?branch=master
+
+[coveralls-url]: https://coveralls.io/r/inakianduaga/eloquent-external-storage
+[coveralls-image]: https://coveralls.io/repos/inakianduaga/eloquent-external-storage/badge.png
