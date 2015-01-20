@@ -19,6 +19,7 @@ class UpdateExternalStorageModelTableExample extends Migration {
         {
             $table->string('content_path')->nullable();
             $table->string('content_md5', 32)->nullable();
+            $table->string('storage_driver')->nullable();
         });
 
     }

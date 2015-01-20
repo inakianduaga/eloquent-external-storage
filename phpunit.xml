@@ -68,9 +68,10 @@
      !-->
     <testsuites>
 
-        <testsuite name="Drivers">
+        <testsuite name="Eloquent Model">
             <directory>./tests/src/Drivers</directory>
             <directory>./tests/src/Models</directory>
+            <directory>./tests/src/Services</directory>
         </testsuite>
 
     </testsuites>

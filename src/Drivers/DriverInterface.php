@@ -1,7 +1,7 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Drivers;
 
 /**
- * Storage operations API
+ * Storage driver API
  */
 interface DriverInterface {
 
@@ -46,5 +46,12 @@ interface DriverInterface {
      * @return self
      */
     public function setConfigKey($key);
+
+    /**
+     * Retrieves the driver's instance config key
+     *
+     * @return string
+     */
+    public function getConfigKey();
 
 } 

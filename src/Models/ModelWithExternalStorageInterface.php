@@ -1,6 +1,6 @@
 <?php namespace InakiAnduaga\EloquentExternalStorage\Models;
 
-use InakiAnduaga\EloquentExternalStorage\DriverInterface as StorageDriver;
+use InakiAnduaga\EloquentExternalStorage\Drivers\DriverInterface as StorageDriver;
 
 /**
  * Requirements for a model to transparently provide external storage capabilities
@@ -76,13 +76,13 @@ interface ModelWithExternalStorageInterface {
      */
     public function syncContentMD5();
 
-
     /**
-     * Determines whether the current (in memory, not stored) content matches the current md5 signature
+     * Sets the storage driver field based on the current Storage Driver
      *
-     * @return boolean
+     * @return self
      */
-    public function doesMD5MatchInMemoryContent();
+    public function syncStorageDriverField();
+
 
 
 }

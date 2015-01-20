@@ -16,7 +16,9 @@ class ExtensionGuesser {
 
     /**
      * Guesses the file extension that would belong to a given content
+     *
      * @param $string
+     * @return string
      */
     public function guess($string)
     {
@@ -25,9 +27,9 @@ class ExtensionGuesser {
         fwrite($tempFile, $string);
         $tempPath = $this->getPathFromFileHandler($tempFile);
 
-        $mimeType = $this->mimeTypeGuesser($tempPath);
+        $mimeType = $this->mimeTypeGuesser->guess($tempPath);
 
-        return $this->extensionGuesserFromMimeType($mimeType);
+        return $this->extensionGuesserFromMimeType->guess($mimeType);
     }
 
     /**
