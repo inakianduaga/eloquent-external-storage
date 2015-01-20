@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "07c93d8c24219c060b983ba1e2e00c94",
+    "hash": "2b46bb93ed61e8cc30033d7a7e0b0e29",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1ec3fb885a891d337540dcd26e33d01ed7f82f1a"
+                "reference": "7dd429f8916eb384fcaf43c6510c519eaf3b900e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1ec3fb885a891d337540dcd26e33d01ed7f82f1a",
-                "reference": "1ec3fb885a891d337540dcd26e33d01ed7f82f1a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7dd429f8916eb384fcaf43c6510c519eaf3b900e",
+                "reference": "7dd429f8916eb384fcaf43c6510c519eaf3b900e",
                 "shasum": ""
             },
             "require": {
@@ -71,7 +71,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-01-09 19:31:57"
+            "time": "2015-01-16 01:44:42"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -400,12 +400,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "691053ddfa1e3100acde3595cd3789085c1d3801"
+                "reference": "c17ed8875f37995491955c58bd0a019f12472599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/691053ddfa1e3100acde3595cd3789085c1d3801",
-                "reference": "691053ddfa1e3100acde3595cd3789085c1d3801",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c17ed8875f37995491955c58bd0a019f12472599",
+                "reference": "c17ed8875f37995491955c58bd0a019f12472599",
                 "shasum": ""
             },
             "require": {
@@ -507,7 +507,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-01-12 20:31:03"
+            "time": "2015-01-19 01:27:09"
         },
         {
             "name": "monolog/monolog",
@@ -671,67 +671,6 @@
                 "php"
             ],
             "time": "2014-07-23 18:24:17"
-        },
-        {
-            "name": "orchestra/testbench",
-            "version": "2.2.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchestral/testbench.git",
-                "reference": "3773b97c895702eb3c2c400621ab6c3b77bf6628"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/3773b97c895702eb3c2c400621ab6c3b77bf6628",
-                "reference": "3773b97c895702eb3c2c400621ab6c3b77bf6628",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "4.2.*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "behat/behat": "~2.5",
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "behat/behat": "Allow to use Behat for testing your Laravel Application/Package",
-                "phpunit/phpunit": "Allow to use PHPUnit for testing your Laravel Application/Package"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchestra\\Testbench\\": "src/Testbench/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com",
-                    "homepage": "https://github.com/crynobone"
-                }
-            ],
-            "description": "Laravel 4 Package Unit Testing Helper",
-            "homepage": "http://orchestraplatform.com/docs/latest/components/testbench/",
-            "keywords": [
-                "BDD",
-                "TDD",
-                "laravel",
-                "orchestra-platform",
-                "orchestral",
-                "testing"
-            ],
-            "time": "2015-01-08 08:23:12"
         },
         {
             "name": "patchwork/utf8",
@@ -934,24 +873,19 @@
         },
         {
             "name": "psr/log",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "a78d6504ff5d4367497785ab2ade91db3a9fbe11"
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/a78d6504ff5d4367497785ab2ade91db3a9fbe11",
-                "reference": "a78d6504ff5d4367497785ab2ade91db3a9fbe11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
                 "shasum": ""
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Psr\\Log\\": ""
@@ -973,7 +907,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2014-01-18 15:33:09"
+            "time": "2012-12-21 11:40:51"
         },
         {
             "name": "stack/builder",
@@ -1030,12 +964,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "e29c7b692bae6610b137670d6749151fd6e41608"
+                "reference": "db95cfa68a8bc91d1c54f75c416f481c9a8bd100"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e29c7b692bae6610b137670d6749151fd6e41608",
-                "reference": "e29c7b692bae6610b137670d6749151fd6e41608",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/db95cfa68a8bc91d1c54f75c416f481c9a8bd100",
+                "reference": "db95cfa68a8bc91d1c54f75c416f481c9a8bd100",
                 "shasum": ""
             },
             "require": {
@@ -1074,7 +1008,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-12-05 14:17:46"
+            "time": "2015-01-18 13:49:36"
         },
         {
             "name": "symfony/browser-kit",
@@ -1244,12 +1178,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Debug.git",
-                "reference": "5d7520c712e09a984095fcf932bd5a63bb25cd3b"
+                "reference": "ed3019589cdadf32c521d1e181f9d72955645c67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Debug/zipball/5d7520c712e09a984095fcf932bd5a63bb25cd3b",
-                "reference": "5d7520c712e09a984095fcf932bd5a63bb25cd3b",
+                "url": "https://api.github.com/repos/symfony/Debug/zipball/ed3019589cdadf32c521d1e181f9d72955645c67",
+                "reference": "ed3019589cdadf32c521d1e181f9d72955645c67",
                 "shasum": ""
             },
             "require": {
@@ -1294,7 +1228,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-13 10:55:30"
+            "time": "2015-01-16 14:51:58"
         },
         {
             "name": "symfony/dom-crawler",
@@ -1356,12 +1290,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "eab88ace7a54741087fe4e0c7acd737d1f6186bf"
+                "reference": "7a26717d431dfb092198d7c55f06788b2de5aaf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/eab88ace7a54741087fe4e0c7acd737d1f6186bf",
-                "reference": "eab88ace7a54741087fe4e0c7acd737d1f6186bf",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/7a26717d431dfb092198d7c55f06788b2de5aaf7",
+                "reference": "7a26717d431dfb092198d7c55f06788b2de5aaf7",
                 "shasum": ""
             },
             "require": {
@@ -1405,7 +1339,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-09 06:51:41"
+            "time": "2015-01-16 15:11:56"
         },
         {
             "name": "symfony/filesystem",
@@ -1870,12 +1804,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "2a86bb6ae49191bd19976408ff19bbe49dace573"
+                "reference": "3d9669e597439e8d205baf315efb757038fb4dea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/2a86bb6ae49191bd19976408ff19bbe49dace573",
-                "reference": "2a86bb6ae49191bd19976408ff19bbe49dace573",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/3d9669e597439e8d205baf315efb757038fb4dea",
+                "reference": "3d9669e597439e8d205baf315efb757038fb4dea",
                 "shasum": ""
             },
             "require": {
@@ -1916,7 +1850,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-01-05 02:10:42"
+            "time": "2015-01-16 19:29:51"
         },
         {
             "name": "mockery/mockery",
@@ -1924,12 +1858,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "d1eeaf0ed40ae91dc36913b5f4085af08c366d9d"
+                "reference": "cce38ee95d444190e8aac2d46c6d5e7b94ea44ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/d1eeaf0ed40ae91dc36913b5f4085af08c366d9d",
-                "reference": "d1eeaf0ed40ae91dc36913b5f4085af08c366d9d",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/cce38ee95d444190e8aac2d46c6d5e7b94ea44ef",
+                "reference": "cce38ee95d444190e8aac2d46c6d5e7b94ea44ef",
                 "shasum": ""
             },
             "require": {
@@ -1968,7 +1902,7 @@
                     "homepage": "http://davedevelopment.co.uk"
                 }
             ],
-            "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succint API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
+            "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succinct API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
             "homepage": "http://github.com/padraic/mockery",
             "keywords": [
                 "BDD",
@@ -1982,7 +1916,68 @@
                 "test double",
                 "testing"
             ],
-            "time": "2015-01-14 18:27:31"
+            "time": "2015-01-18 20:11:41"
+        },
+        {
+            "name": "orchestra/testbench",
+            "version": "2.2.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/testbench.git",
+                "reference": "3773b97c895702eb3c2c400621ab6c3b77bf6628"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/3773b97c895702eb3c2c400621ab6c3b77bf6628",
+                "reference": "3773b97c895702eb3c2c400621ab6c3b77bf6628",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "4.2.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5",
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "behat/behat": "Allow to use Behat for testing your Laravel Application/Package",
+                "phpunit/phpunit": "Allow to use PHPUnit for testing your Laravel Application/Package"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Testbench\\": "src/Testbench/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                }
+            ],
+            "description": "Laravel 4 Package Unit Testing Helper",
+            "homepage": "http://orchestraplatform.com/docs/latest/components/testbench/",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "laravel",
+                "orchestra-platform",
+                "orchestral",
+                "testing"
+            ],
+            "time": "2015-01-08 08:23:12"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1990,12 +1985,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "29326b2455f383483d0fed3b7da9890177c33781"
+                "reference": "5aaadd58aab6fd96200596820994641cb685f4aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/29326b2455f383483d0fed3b7da9890177c33781",
-                "reference": "29326b2455f383483d0fed3b7da9890177c33781",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5aaadd58aab6fd96200596820994641cb685f4aa",
+                "reference": "5aaadd58aab6fd96200596820994641cb685f4aa",
                 "shasum": ""
             },
             "require": {
@@ -2044,7 +2039,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-01-01 09:33:48"
+            "time": "2015-01-15 05:45:24"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2185,12 +2180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "091ec6b68b31a15da4e41ba375c6f77b7f15c2b4"
+                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/091ec6b68b31a15da4e41ba375c6f77b7f15c2b4",
-                "reference": "091ec6b68b31a15da4e41ba375c6f77b7f15c2b4",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/db32c18eba00b121c145575fcbcd4d4d24e6db74",
+                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74",
                 "shasum": ""
             },
             "require": {
@@ -2203,7 +2198,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -2226,7 +2221,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-01-02 15:57:31"
+            "time": "2015-01-17 09:51:32"
         },
         {
             "name": "phpunit/phpunit",
@@ -2308,12 +2303,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "6668906147047e8cd8ee66847feb65e55cc4e7e6"
+                "reference": "b752b41e3fead4feee99f3a2f2972cef517abb8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/6668906147047e8cd8ee66847feb65e55cc4e7e6",
-                "reference": "6668906147047e8cd8ee66847feb65e55cc4e7e6",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b752b41e3fead4feee99f3a2f2972cef517abb8b",
+                "reference": "b752b41e3fead4feee99f3a2f2972cef517abb8b",
                 "shasum": ""
             },
             "require": {
@@ -2355,7 +2350,82 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-01-01 09:22:12"
+            "time": "2015-01-18 10:44:19"
+        },
+        {
+            "name": "satooshi/php-coveralls",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/satooshi/php-coveralls.git",
+                "reference": "2fbf803803d179ab1082807308a67bbd5a760c70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/satooshi/php-coveralls/zipball/2fbf803803d179ab1082807308a67bbd5a760c70",
+                "reference": "2fbf803803d179ab1082807308a67bbd5a760c70",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-simplexml": "*",
+                "guzzle/guzzle": ">=2.7",
+                "php": ">=5.3",
+                "psr/log": "1.0.0",
+                "symfony/config": ">=2.0",
+                "symfony/console": ">=2.0",
+                "symfony/stopwatch": ">=2.2",
+                "symfony/yaml": ">=2.0"
+            },
+            "require-dev": {
+                "apigen/apigen": "2.8.*@stable",
+                "pdepend/pdepend": "dev-master as 2.0.0",
+                "phpmd/phpmd": "dev-master",
+                "phpunit/php-invoker": ">=1.1.0,<1.2.0",
+                "phpunit/phpunit": "3.7.*@stable",
+                "sebastian/finder-facade": "dev-master",
+                "sebastian/phpcpd": "1.4.*@stable",
+                "squizlabs/php_codesniffer": "1.4.*@stable",
+                "theseer/fdomdocument": "dev-master"
+            },
+            "suggest": {
+                "symfony/http-kernel": "Allows Symfony integration"
+            },
+            "bin": [
+                "composer/bin/coveralls"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Satooshi\\Component": "src/",
+                    "Satooshi\\Bundle": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kitamura Satoshi",
+                    "email": "with.no.parachute@gmail.com",
+                    "homepage": "https://www.facebook.com/satooshi.jp"
+                }
+            ],
+            "description": "PHP client library for Coveralls API",
+            "homepage": "https://github.com/satooshi/php-coveralls",
+            "keywords": [
+                "ci",
+                "coverage",
+                "github",
+                "test"
+            ],
+            "time": "2014-11-11 15:35:34"
         },
         {
             "name": "sebastian/comparator",
@@ -2624,18 +2694,113 @@
             "time": "2014-12-15 14:25:24"
         },
         {
+            "name": "symfony/config",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Config",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Config.git",
+                "reference": "2233b460470266caa95857d0a7401b300400b933"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/2233b460470266caa95857d0a7401b300400b933",
+                "reference": "2233b460470266caa95857d0a7401b300400b933",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/filesystem": "~2.7|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Config\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Config Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-01-03 16:09:48"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Stopwatch",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Stopwatch.git",
+                "reference": "dbbf321b10bbd789d2f572230f29b8d943741889"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/dbbf321b10bbd789d2f572230f29b8d943741889",
+                "reference": "dbbf321b10bbd789d2f572230f29b8d943741889",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Stopwatch Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-01-03 08:04:30"
+        },
+        {
             "name": "symfony/yaml",
             "version": "2.7.x-dev",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "16c97a1567ef607b16f843d3ebc99f113cc1957e"
+                "reference": "f562c11a31743e3ed8d972fcadd1a90022c5c7e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/16c97a1567ef607b16f843d3ebc99f113cc1957e",
-                "reference": "16c97a1567ef607b16f843d3ebc99f113cc1957e",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/f562c11a31743e3ed8d972fcadd1a90022c5c7e4",
+                "reference": "f562c11a31743e3ed8d972fcadd1a90022c5c7e4",
                 "shasum": ""
             },
             "require": {
@@ -2668,7 +2833,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-09 18:07:24"
+            "time": "2015-01-16 14:55:54"
         }
     ],
     "aliases": [],
@@ -2676,9 +2841,11 @@
     "stability-flags": {
         "aws/aws-sdk-php": 20,
         "phpunit/phpunit": 20,
-        "mockery/mockery": 20
+        "mockery/mockery": 20,
+        "satooshi/php-coveralls": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.0"
     },
