@@ -117,4 +117,4 @@ Both options have the ability to generate a code coverage report in different fo
 [travis-image]: https://travis-ci.org/inakianduaga/eloquent-external-storage.svg?branch=master
 
 [coveralls-url]: https://coveralls.io/r/inakianduaga/eloquent-external-storage
-[coveralls-image]: https://coveralls.io/repos/inakianduaga/eloquent-external-storage/badge.png
+[coveralls-image]: https://coveralls.io/repos/inakianduaga/eloquent-external-storage/badge.svg?branch=master
