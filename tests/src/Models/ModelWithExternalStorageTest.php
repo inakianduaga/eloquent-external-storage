@@ -12,13 +12,21 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
     //-- Setup --//
 
     /**
-     * Clean up file driver files after each test
+     *
      */
     public function tearDown()
     {
         parent::tearDown();
 
+        //Clean up file driver files after each test
         $this->cleanupFilesInFolder(storage_path() . DIRECTORY_SEPARATOR . $this->fileStorageFolderRelativeToStoragePath);
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->refreshStorageDriver();
     }
 
     //-- Tests --//
@@ -66,11 +74,7 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
     public function testCreateWithContent()
     {
         //Random string as content
-        $content = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
-
-        $this->mockStorageConfiguration('mocked.config.path', array(
-            'storageSubfolder' => $this->fileStorageFolderRelativeToStoragePath
-        ));
+        $content = $this->generateRandomContent();
 
         $model = $this->createModel($content);
 
@@ -92,6 +96,41 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
 
         //TODO: Partial mock (Spy) on fileDriver and make sure the store method hasn't been called
     }
+
+    public function testModelUpdateWithoutContentChanges()
+    {
+        //Create model w/ content
+        $content = $this->generateRandomContent();
+        $model = $this->createModel($content);
+
+        //Inject spied storage driver (http://davedevelopment.co.uk/2014/10/09/mockery-spies.html)
+        $storageDriverSpy = \Mockery::spy(FileDriver::class);
+        $model->setStorageDriver($storageDriverSpy);
+
+        //Model update timestamp & check storage driver store hasn't been called
+        $model->update(array('updated_at' => '2000-01-01 00:00:00'));
+        $storageDriverSpy->shouldNotHaveReceived("store");
+    }
+
+
+    /** @test */
+    public function testModelUpdateWithContentChanges()
+    {
+        //Create model w/ content
+        $model = $this->createModel('foo');
+
+        //Update model's content
+        $model->setContent('bar');
+
+        //Inject spied storage driver (http://davedevelopment.co.uk/2014/10/09/mockery-spies.html)
+        $storageDriverSpy = \Mockery::spy(FileDriver::class);
+        $model->setStorageDriver($storageDriverSpy);
+
+        //Model update & check storage driver store has been called
+        $model->update(array('updated_at' => '2000-01-01 00:00:01'));
+        $storageDriverSpy->shouldHaveReceived("store");
+    }
+
 
 
     //-- Private Methods --//
@@ -131,4 +170,24 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
                 unlink($file); // delete file
         }
     }
+
+    private function generateRandomContent()
+    {
+        return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+    }
+
+    /**
+     * Sets a clean storage driver with default substorage path
+     */
+    private function refreshStorageDriver()
+    {
+        //Set new file driver as default storage driver
+        TestModel::setStorageDriver(new FileDriver());
+
+        //Fix storage folder path
+        $this->mockStorageConfiguration('mocked.config.path', array(
+            'storageSubfolder' => $this->fileStorageFolderRelativeToStoragePath
+        ));
+    }
+
 }
