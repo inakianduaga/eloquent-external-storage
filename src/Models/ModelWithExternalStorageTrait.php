@@ -113,7 +113,7 @@ trait ModelWithExternalStorageTrait
          */
         static::deleting(function (Model $model) {
             if ($model->hasInMemoryContent()) {
-                $model->getStorageDriverInstance()->remove($model->getPath);
+                $model->getStorageDriverInstance()->remove($model->getPath());
             }
         });
     }
