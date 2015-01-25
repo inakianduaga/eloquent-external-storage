@@ -45,8 +45,6 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
 
     public function testUpdateStorageDriver()
     {
-        $configKey = 'foo/bar';
-
         //We first set a storage driver that will use default configuration, and check that config is indeed being used
         $fileDriver = new FileDriver();
         $configKey = $fileDriver->getConfigKey();
