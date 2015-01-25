@@ -48,6 +48,13 @@ abstract class AbstractBaseTestCase extends OrchestraTestCase {
 //        ));
     }
 
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        m::close();
+    }
+
     /**
      * Define environment setup.
      *
@@ -149,4 +156,6 @@ abstract class AbstractBaseTestCase extends OrchestraTestCase {
             ->with($property)
             ->andReturn($value);
     }
+
+
 } 

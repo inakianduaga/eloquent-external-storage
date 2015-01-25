@@ -11,17 +11,26 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
 
     //-- Setup --//
 
-    /**
-     * Clean up file driver files after each test
-     */
     public function tearDown()
     {
         parent::tearDown();
 
+        //Clean up file driver files after each test
         $this->cleanupFilesInFolder(storage_path() . DIRECTORY_SEPARATOR . $this->fileStorageFolderRelativeToStoragePath);
     }
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->refreshStorageDriver();
+
+        $this->resetEvents();
+    }
+
+    //-----------//
     //-- Tests --//
+    //-----------//
 
     public function testSetStorageDriverAndGetStorageDriverInstance()
     {
@@ -36,8 +45,6 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
 
     public function testUpdateStorageDriver()
     {
-        $configKey = 'foo/bar';
-
         //We first set a storage driver that will use default configuration, and check that config is indeed being used
         $fileDriver = new FileDriver();
         $configKey = $fileDriver->getConfigKey();
@@ -52,7 +59,6 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         $this->assertEquals(TestModel::getStorageDriverInstance()->getConfigKey(), $configKey);
     }
 
-
     public function testSetStorageDriverWithConfigPath()
     {
         $configKey = 'foo/bar';
@@ -63,14 +69,19 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         $this->assertEquals(TestModel::getStorageDriverInstance()->getConfigKey(), $configKey);
     }
 
+    public function testCreateWithoutContent()
+    {
+        $model = $this->createModel();
+
+        $this->assertEmpty($model->getContent());
+
+        //TODO: Partial mock (Spy) on fileDriver and make sure the store method hasn't been called
+    }
+
     public function testCreateWithContent()
     {
         //Random string as content
-        $content = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
-
-        $this->mockStorageConfiguration('mocked.config.path', array(
-            'storageSubfolder' => $this->fileStorageFolderRelativeToStoragePath
-        ));
+        $content = $this->generateRandomContent();
 
         $model = $this->createModel($content);
 
@@ -84,17 +95,44 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
         $this->assertEquals($storedContent, $content);
     }
 
-    public function testCreateWithoutContent()
+    /** @test */
+    public function testModelUpdateWithContentChanges()
     {
-        $model = $this->createModel();
+        //Create model w/ content
+        $model = $this->createModel('foo');
 
-        $this->assertEmpty($model->getContent());
+        //Update model's content
+        $model->setContent('bar');
 
-        //TODO: Partial mock (Spy) on fileDriver and make sure the store method hasn't been called
+        //Inject spied storage driver (http://davedevelopment.co.uk/2014/10/09/mockery-spies.html)
+        $storageDriverSpy = \Mockery::spy(FileDriver::class);
+        $model->setStorageDriver($storageDriverSpy);
+
+        //Model update & check storage driver store has been called
+        $model->update(array('updated_at' => '2000-01-01 00:00:01'));
+        $storageDriverSpy->shouldHaveReceived("store");
+    }
+
+    /** @test */
+    public function testShouldDeleteContentWhenModelIsDeleted()
+    {
+        //Create model w/ content
+        $model = $this->createModel('foo');
+        $storagePath = $model->getPath();
+
+        //Inject spied storage driver (http://davedevelopment.co.uk/2014/10/09/mockery-spies.html)
+        $storageDriverSpy = \Mockery::spy(FileDriver::class);
+        $model->setStorageDriver($storageDriverSpy);
+
+        //Model update & check storage driver store has been called
+        $model->delete();
+        $storageDriverSpy->shouldHaveReceived("remove")->with($storagePath);
     }
 
 
+    //---------------------//
     //-- Private Methods --//
+    //---------------------//
 
     private function createModel($content = null)
     {
@@ -131,4 +169,35 @@ class ModelWithExternalStorageTest extends AbstractBaseDatabaseTestCase {
                 unlink($file); // delete file
         }
     }
+
+    private function generateRandomContent()
+    {
+        return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+    }
+
+    /**
+     * Sets a clean storage driver with default substorage path
+     */
+    private function refreshStorageDriver()
+    {
+        //Set new file driver as default storage driver
+        TestModel::setStorageDriver(new FileDriver());
+
+        //Fix storage folder path
+        $this->mockStorageConfiguration('mocked.config.path', array(
+            'storageSubfolder' => $this->fileStorageFolderRelativeToStoragePath
+        ));
+    }
+
+    /**
+     * Resets the eloquent creation/update/etc model bindings to work on consecutive tests
+     *
+     * http://stackoverflow.com/questions/17428050/laravel-4-model-events-dont-work-with-phpunit?rq=1
+     */
+    private function resetEvents()
+    {
+        TestModel::flushEventListeners();
+        TestModel::boot();
+    }
+
 }

@@ -29,9 +29,7 @@ class File extends AbstractDriver {
 
     public function remove($path)
     {
-        $absolutePath = $this->getBaseStoragePath().$path;
-
-        unlink($absolutePath);
+        unlink($path);
     }
 
     /**

@@ -81,12 +81,6 @@
      ! blacklist and whitelist for the code coverage reporting.
      !-->
     <filter>
-        <blacklist>
-            <file>./src/Models/ModelWithExternalStorageInterface.php</file>
-            <file>./src/Models/AbstractModelWithExternalStorage.php</file>
-        </blacklist>
-    </filter>
-    <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/Drivers</directory>
             <directory suffix=".php">src/Models</directory>

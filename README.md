@@ -1,7 +1,7 @@
 eloquent-external-storage
 =========================
 
-[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][dependency-status-image]][dependency-status-url]
 
 > Adds external storage to an eloquent model.
 
@@ -118,3 +118,10 @@ Both options have the ability to generate a code coverage report in different fo
 
 [coveralls-url]: https://coveralls.io/r/inakianduaga/eloquent-external-storage
 [coveralls-image]: https://coveralls.io/repos/inakianduaga/eloquent-external-storage/badge.svg?branch=master
+
+[code-climate-url]: https://codeclimate.com/github/inakianduaga/eloquent-external-storage
+[code-climate-image]: https://codeclimate.com/github/inakianduaga/eloquent-external-storage/badges/gpa.svg
+
+[dependency-status-url]: https://gemnasium.com/inakianduaga/eloquent-external-storage
+[dependency-status-image]: https://gemnasium.com/inakianduaga/eloquent-external-storage.svg
+

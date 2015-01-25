@@ -91,7 +91,7 @@ trait ModelWithExternalStorageTrait
          *  - Before running a model update, if the content is previously set, we will run an update
          */
         static::updating(function (Model $model) {
-            if ($model->hasInMemoryContent() && $model->doesMD5MatchInMemoryContent()) {
+            if ($model->hasInMemoryContent() && !$model->doesMD5MatchInMemoryContent()) {
 
                 //Set the stored content's path
                 $storagePath = $model->getStorageDriverInstance()->store($model->getContent());
@@ -113,7 +113,7 @@ trait ModelWithExternalStorageTrait
          */
         static::deleting(function (Model $model) {
             if ($model->hasInMemoryContent()) {
-                $model->getStorageDriverInstance()->remove($model->getPath);
+                $model->getStorageDriverInstance()->remove($model->getPath());
             }
         });
     }
@@ -232,9 +232,9 @@ trait ModelWithExternalStorageTrait
      *
      * @return boolean
      */
-    private function doesMD5MatchInMemoryContent()
+    public function doesMD5MatchInMemoryContent()
     {
-        return $this->{$this->databaseFields['contentMD5']} == md5($this->content);
+        return $this->{$this->databaseFields['contentMD5']} == md5($this->content) && !$this->isDirty($this->databaseFields['contentMD5']);
     }
 
     /**
