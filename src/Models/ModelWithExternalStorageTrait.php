@@ -232,7 +232,7 @@ trait ModelWithExternalStorageTrait
      *
      * @return boolean
      */
-    private function doesMD5MatchInMemoryContent()
+    public function doesMD5MatchInMemoryContent()
     {
         return $this->{$this->databaseFields['contentMD5']} == md5($this->content) && !$this->isDirty($this->databaseFields['contentMD5']);
     }
