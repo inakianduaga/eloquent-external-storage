@@ -86,6 +86,7 @@ class AwsS3 extends AbstractDriver {
         }
         catch (S3Exception $e) {
             echo "There was an error uploading the file: ". $e->getMessage().PHP_EOL;
+            $absolutePath = false;
         }
         // }
 
@@ -101,24 +102,24 @@ class AwsS3 extends AbstractDriver {
         );
     }
 
-    /**
-     * Checks whether an S3 object exists
-     *
-     * @param string $bucket
-     * @param string $key
-     *
-     * @return bool
-     * @throws S3Exception if there is a problem
-     */
-    private function doesS3ObjectExist($bucket, $key)
-    {
-        try {
-            return $this->s3->doesObjectExist($bucket, $key);
-        }
-        catch (S3Exception $e) {
-            echo "There was a problem trying to locate S3 object: $key.\n";
-        }
-    }
+//    /**
+//     * Checks whether an S3 object exists
+//     *
+//     * @param string $bucket
+//     * @param string $key
+//     *
+//     * @return bool
+//     * @throws S3Exception if there is a problem
+//     */
+//    private function doesS3ObjectExist($bucket, $key)
+//    {
+//        try {
+//            return $this->s3->doesObjectExist($bucket, $key);
+//        }
+//        catch (S3Exception $e) {
+//            echo "There was a problem trying to locate S3 object: $key.\n";
+//        }
+//    }
 
     /**
      *

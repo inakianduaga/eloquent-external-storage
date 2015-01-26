@@ -4,6 +4,7 @@ use InakiAnduaga\EloquentExternalStorage\Tests\AbstractBaseTestCase as BaseTestC
 use InakiAnduaga\EloquentExternalStorage\Drivers\AwsS3 as StorageDriver;
 use Aws\S3\S3Client;
 use Illuminate\Support\Facades\Config;
+use \Aws\S3\Exception\S3Exception;
 
 class AwsS3Test extends BaseTestCase {
 
@@ -43,7 +44,6 @@ class AwsS3Test extends BaseTestCase {
     public function testStoreAndFetch()
     {
         $storedPath = $this->storageDriver->store($this->content);
-        var_dump($storedPath);
 
         $this->assertTrue(!empty($storedPath));
 
@@ -52,6 +52,9 @@ class AwsS3Test extends BaseTestCase {
         $this->assertEquals($content, $this->content);
     }
 
+    /**
+     * @expectedException \Aws\S3\Exception\AccessDeniedException
+     */
     public function testRemove()
     {
         $storedPath = $this->storageDriver->store($this->content);
@@ -59,8 +62,6 @@ class AwsS3Test extends BaseTestCase {
         $this->storageDriver->remove($storedPath);
 
         $content = $this->storageDriver->fetch($storedPath);
-
-        //HERE THERE SHOULD BE SOME EXCEPTION OR ERROR SINCE THE FILE SHOULDN'T BE REACHABLE
     }
 
 
@@ -73,10 +74,6 @@ class AwsS3Test extends BaseTestCase {
      */
     private function refreshDriver()
     {
-        // Inject new file driver and mock config
-        $this->storageDriver = new StorageDriver();
-        $this->storageDriver->setConfigKey('mocked.config.key');
-
         Config::set('mocked.config.key', array(
             'key'    => getenv('AWS_S3_KEY'), // Your AWS Access Key ID
             'secret' => getenv('AWS_S3_SECRET'), // Your AWS Secret Access Key
@@ -84,6 +81,10 @@ class AwsS3Test extends BaseTestCase {
             's3Bucket' => getenv('AWS_S3_BUCKET'),
             's3BucketSubfolder' => getenv('AWS_S3_BUCKET_SUBFOLDER'),
         ));
+
+        // Inject new file driver and mock config
+        $this->storageDriver = new StorageDriver();
+        $this->storageDriver->setConfigKey('mocked.config.key');
     }
 
     private function generateRandomContent()
