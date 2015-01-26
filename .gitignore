@@ -10,9 +10,11 @@ coverage
 #build related
 gulp
 node_modules
-
 tests/storage/files/*
 tests/storage/meta/*
+
+# Test AWS credentials
+tests/src/.env
 
 #Keep special .gitkeep file, useful for keeping empty directory structure
 !.gitkeep

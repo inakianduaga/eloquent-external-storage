@@ -14,12 +14,6 @@ class AwsS3 extends AbstractDriver {
 
     protected $configKey = 'inakianduaga/eloquent-external-storage::awsS3';
 
-//    /** @var string */
-//    private $s3Bucket;
-
-    /** var S3Client */
-    private $s3Client;
-
     /**
      * An s3 client configured instance
      * @var S3Client
@@ -27,13 +21,11 @@ class AwsS3 extends AbstractDriver {
     private $s3;
 
     /**
-     * @param S3Client $s3Client
+     * Initialize the S3 Client
      */
-    function __construct(S3Client $s3Client) {
+    function __construct() {
 
         parent::__construct();
-
-        $this->s3Client = $s3Client;
 
         $this->initializeConfiguredS3Client();
     }
@@ -81,7 +73,7 @@ class AwsS3 extends AbstractDriver {
     public function store($content)
     {
         $relativePath = $this->generateStoragePath($content);
-        $absolutePath = $this->getConfigRelativeKey('s3BucketSubfolder').$relativePath;
+        $absolutePath = $this->getConfigRelativeKey('s3BucketSubfolder').'/'.$relativePath;
 
         // Note: The S3 doesS3ObjectExist method has a problem when the object doesn't exist within the sdk, so we skip this check for now
         // if(! $this->doesS3ObjectExist($this->getConfigRelativeKey('s3Bucket'),, $absolutePath)) {
@@ -93,7 +85,8 @@ class AwsS3 extends AbstractDriver {
             ));
         }
         catch (S3Exception $e) {
-            echo "There was an error uploading the file.\n";
+            echo "There was an error uploading the file: ". $e->getMessage().PHP_EOL;
+            $absolutePath = false;
         }
         // }
 
@@ -109,28 +102,31 @@ class AwsS3 extends AbstractDriver {
         );
     }
 
-    /**
-     * Checks whether an S3 object exists
-     *
-     * @param string $bucket
-     * @param string $key
-     *
-     * @return bool
-     * @throws S3Exception if there is a problem
-     */
-    private function doesS3ObjectExist($bucket, $key)
-    {
-        try {
-            return $this->s3->doesObjectExist($bucket, $key);
-        }
-        catch (S3Exception $e) {
-            echo "There was a problem trying to locate S3 object: $key.\n";
-        }
-    }
+//    /**
+//     * Checks whether an S3 object exists
+//     *
+//     * @param string $bucket
+//     * @param string $key
+//     *
+//     * @return bool
+//     * @throws S3Exception if there is a problem
+//     */
+//    private function doesS3ObjectExist($bucket, $key)
+//    {
+//        try {
+//            return $this->s3->doesObjectExist($bucket, $key);
+//        }
+//        catch (S3Exception $e) {
+//            echo "There was a problem trying to locate S3 object: $key.\n";
+//        }
+//    }
 
+    /**
+     *
+     */
     private function initializeConfiguredS3Client()
     {
-        $this->s3 = $this->s3Client->factory(array(
+        $this->s3 = S3Client::factory(array(
             'key'    => $this->getConfigRelativeKey('key'),
             'secret' => $this->getConfigRelativeKey('secret'),
             'region' => $this->getConfigRelativeKey('region'),
