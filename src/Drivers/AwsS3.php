@@ -73,7 +73,7 @@ class AwsS3 extends AbstractDriver {
     public function store($content)
     {
         $relativePath = $this->generateStoragePath($content);
-        $absolutePath = $this->getConfigRelativeKey('s3BucketSubfolder').$relativePath;
+        $absolutePath = $this->getConfigRelativeKey('s3BucketSubfolder').'/'.$relativePath;
 
         // Note: The S3 doesS3ObjectExist method has a problem when the object doesn't exist within the sdk, so we skip this check for now
         // if(! $this->doesS3ObjectExist($this->getConfigRelativeKey('s3Bucket'),, $absolutePath)) {
@@ -85,7 +85,7 @@ class AwsS3 extends AbstractDriver {
             ));
         }
         catch (S3Exception $e) {
-            echo "There was an error uploading the file.\n";
+            echo "There was an error uploading the file: ". $e->getMessage().PHP_EOL;
         }
         // }
 
@@ -120,6 +120,9 @@ class AwsS3 extends AbstractDriver {
         }
     }
 
+    /**
+     *
+     */
     private function initializeConfiguredS3Client()
     {
         $this->s3 = S3Client::factory(array(

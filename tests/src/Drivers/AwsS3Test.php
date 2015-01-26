@@ -40,19 +40,27 @@ class AwsS3Test extends BaseTestCase {
     //-- Tests --//
     //-----------//
 
-    public function testStore()
+    public function testStoreAndFetch()
     {
-//        $this->assertTrue(is_file($this->storedPath));
-//
-//        $this->assertEquals($this->content, file_get_contents($this->storedPath));
-    }
+        $storedPath = $this->storageDriver->store($this->content);
+        var_dump($storedPath);
 
-    public function testFetch()
-    {
+        $this->assertTrue(!empty($storedPath));
+
+        $content = $this->storageDriver->fetch($storedPath);
+
+        $this->assertEquals($content, $this->content);
     }
 
     public function testRemove()
     {
+        $storedPath = $this->storageDriver->store($this->content);
+
+        $this->storageDriver->remove($storedPath);
+
+        $content = $this->storageDriver->fetch($storedPath);
+
+        //HERE THERE SHOULD BE SOME EXCEPTION OR ERROR SINCE THE FILE SHOULDN'T BE REACHABLE
     }
 
 
@@ -61,7 +69,7 @@ class AwsS3Test extends BaseTestCase {
     //---------------------//
 
     /**
-     * Sets a clean storage driver with default substorage path
+     * Sets a clean storage driver with configuration & credentials read from environment
      */
     private function refreshDriver()
     {
