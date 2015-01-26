@@ -24,7 +24,8 @@
         "phpunit/phpunit": "4.3.*@dev",
         "mockery/mockery": "dev-master",
         "orchestra/testbench" : "2.2.x",
-        "satooshi/php-coveralls": "dev-master"
+        "satooshi/php-coveralls": "dev-master",
+        "vlucas/phpdotenv" : "dev-master"
     },
     "autoload": {
       "psr-4": {

@@ -111,7 +111,11 @@ There are several commands related to testing
 
 Both options have the ability to generate a code coverage report in different formats. When this is selected, a local server will be launched to visualize the coverage report
 
+### Testing AWS S3 Driver
 
+- Valid AWS S3 credentials need to be provided via `tests/.env` file, see `tests/.env.example` as an example.
+- Travis CI integration is performed by passing encrypted credentials in travis.yml (valid only for inakianduaga/eloquent-external-storage repo).
+- [Amazon S3 testing in Travis CI](http://milesj.me/blog/read/amazon-s3-testing-travis-ci)
 
 [travis-url]: https://travis-ci.org/inakianduaga/eloquent-external-storage
 [travis-image]: https://travis-ci.org/inakianduaga/eloquent-external-storage.svg?branch=master
