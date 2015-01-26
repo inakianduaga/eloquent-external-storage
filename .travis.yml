@@ -28,6 +28,7 @@ env:
   global:
     - AWS_S3_REGION="eu-west-1"
     - AWS_S3_BUCKET="github-ci-test"
+    - AWS_S3_BUCKET_SUBFOLDER="files"
     # Encrypted AWS_S3_KEY, AWS_S3_SECRET
     - secure: fyTrGJ0tuP9i+WxWSz6M7VjpzKot5Lvp1t/KDoCtjE1h5U5FBaQ/W7mITj3lja79ZLOeL6rgCNdPR+5aUPjcVGvGWTs4VsbL6AUMql5XmK3hHb25/S0LgItnsFoPpp2XuptPyjo2k1RXGJfU8ImZCCY80WscKimuIMqMukcmQWE=
     - secure: GUza74BlQMzxu5UKtSXx7J0t2HOMHYVh61PC5PqPZF6IzUuI5sfEkt5WhYM3vyAZ/wMzzO0sIGZKUhWIZVG9QxTMgwdGtUGJyoz66f96ebQcRtGdPHfBGwWfUzsYtPiXBgao2KTLm0iKEGw9gST67zXBg17z11wadyiVv6NoKwc=

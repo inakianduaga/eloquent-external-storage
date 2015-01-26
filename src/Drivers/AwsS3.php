@@ -14,12 +14,6 @@ class AwsS3 extends AbstractDriver {
 
     protected $configKey = 'inakianduaga/eloquent-external-storage::awsS3';
 
-//    /** @var string */
-//    private $s3Bucket;
-
-    /** var S3Client */
-    private $s3Client;
-
     /**
      * An s3 client configured instance
      * @var S3Client
@@ -27,13 +21,11 @@ class AwsS3 extends AbstractDriver {
     private $s3;
 
     /**
-     * @param S3Client $s3Client
+     * Initialize the S3 Client
      */
-    function __construct(S3Client $s3Client) {
+    function __construct() {
 
         parent::__construct();
-
-        $this->s3Client = $s3Client;
 
         $this->initializeConfiguredS3Client();
     }
@@ -130,7 +122,7 @@ class AwsS3 extends AbstractDriver {
 
     private function initializeConfiguredS3Client()
     {
-        $this->s3 = $this->s3Client->factory(array(
+        $this->s3 = S3Client::factory(array(
             'key'    => $this->getConfigRelativeKey('key'),
             'secret' => $this->getConfigRelativeKey('secret'),
             'region' => $this->getConfigRelativeKey('region'),
