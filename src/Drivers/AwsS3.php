@@ -47,7 +47,7 @@ class AwsS3 extends AbstractDriver {
     /**
      * {@inheritDoc}
      *
-     * http://stackoverflow.com/questions/13686316/grabbing-contents-of-object-from-s3-via-php-sdk-2
+     * @link http://stackoverflow.com/questions/13686316/grabbing-contents-of-object-from-s3-via-php-sdk-2
      */
     public function fetch($path) {
 
@@ -68,7 +68,7 @@ class AwsS3 extends AbstractDriver {
     /**
      * {@inheritDoc}
      *
-     * http://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpPHP.html
+     * @link http://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpPHP.html
      */
     public function store($content)
     {

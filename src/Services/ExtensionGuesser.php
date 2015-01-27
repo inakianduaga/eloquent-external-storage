@@ -33,7 +33,7 @@ class ExtensionGuesser {
     }
 
     /**
-     * http://stackoverflow.com/questions/5144583/getting-filename-or-deleting-file-using-file-handle
+     * @link http://stackoverflow.com/questions/5144583/getting-filename-or-deleting-file-using-file-handle
      *
      * @param $handler
      *

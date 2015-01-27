@@ -5,6 +5,9 @@ use InakiAnduaga\EloquentExternalStorage\Services\ExtensionGuesser;
 use Illuminate\Config\Repository as ConfigService;
 use Carbon\Carbon;
 
+/**
+ * Common baseline for all drivers
+ */
 abstract class AbstractDriver implements DriverInterface {
 
     /**
