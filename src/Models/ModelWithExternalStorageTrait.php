@@ -63,7 +63,10 @@ trait ModelWithExternalStorageTrait
     {
         parent::boot();
 
-        static::injectStorageDriver();
+        //Attempt to auto-inject the storage driver if we haven't initialized it yet
+        if(static::$storageDriver === null) {
+            static::injectStorageDriver();
+        }
 
         /**
          * Creating Event
@@ -219,12 +222,15 @@ trait ModelWithExternalStorageTrait
     // ---------------------------
 
     /**
-     * Inject storage driver and pass configuration
+     * Inject storage driver and pass configuration using the app IoC container
      */
     private static function injectStorageDriver()
     {
-        static::$storageDriver = app(StorageDriver::class);
-        static::$storageDriver->setConfigKey(static::$storageDriverConfigPath);
+        //Only attempt to inject driver if there is a IoC binding for the interface
+        if(App::getBindings()[StorageDriver::class]) {
+            static::$storageDriver = app(StorageDriver::class);
+            static::$storageDriver->setConfigKey(static::$storageDriverConfigPath);
+        }
     }
 
     /**
