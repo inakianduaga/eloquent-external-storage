@@ -10,7 +10,14 @@ use Aws\S3\Exception\S3Exception;
  */
 class AwsS3 extends AbstractDriver {
 
-    protected $directorySeparator = '_';
+    /**
+     * {@inheritDoc}
+     *
+     * virtual folders on S3 use /
+     *
+     * @var string
+     */
+    protected $directorySeparator = '/';
 
     protected $configKey = 'inakianduaga/eloquent-external-storage::awsS3';
 
