@@ -87,7 +87,6 @@ You can then modify the placeholder values in the files
 
 Note that you should set the models `$storageDriverConfigPath` property to point to `inakianduaga/eloquent-external-storage::awsS3` for the example above, when using S3.
 
-
 ## Usage:
 
 - Simply extend `InakiAnduaga\EloquentExternalStorage\Models\AbstractModelWithExternalStorage` in your eloquent model (or use the trait `InakiAnduaga\EloquentExternalStorage\Models\ModelWithExternalStorageTrait` if you can't use class extension. 

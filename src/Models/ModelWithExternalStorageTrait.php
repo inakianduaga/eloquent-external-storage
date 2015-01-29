@@ -154,7 +154,7 @@ trait ModelWithExternalStorageTrait
         if(!$this->hasInMemoryContent() && empty($this->getPath())) {
             return null;
         } else {
-            return !empty($this->content) ? $this->content : app(StorageDriver::class)->fetch($this->getPath());
+            return !empty($this->content) ? $this->content : $this->getStorageDriverInstance()->fetch($this->getPath());
         }
     }
 
