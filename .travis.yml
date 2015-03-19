@@ -4,9 +4,10 @@ language: php
 # list any PHP version you want to test against
 php:
   # using major version aliases
-
   # aliased to a recent 5.5.x version
   - 5.5
+  - hhvm
+  - hhvm-nightly
 
 install: composer install --dev
 
