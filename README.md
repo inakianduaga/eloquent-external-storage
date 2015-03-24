@@ -1,7 +1,7 @@
 eloquent-external-storage
 =========================
 
-[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![Dependency Status][dependency-status-image]][dependency-status-url]
+[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Code Climate][code-climate-image]][code-climate-url] [![HHVM Status][hhvm-status-image]][hhvm-status-url] [![Dependency Status][dependency-status-image]][dependency-status-url]
 
 > Adds external storage capabilities to an eloquent model.
 
@@ -116,7 +116,7 @@ Both options have the ability to generate a code coverage report in different fo
 
 ### Testing AWS S3 Driver
 
-- **Locally:** Valid AWS S3 credentials need to be provided via `tests/.env` file, see `tests/.env.example` as an example.
+- **Locally:** Valid AWS S3 credentials can be provided via `tests/.env` file, see `tests/.env.example` as an example. If no credentials are set, the AWS S3 tests will be skipped
 - **CI**: Travis CI integration is performed by passing encrypted credentials in travis.yml (valid only for inakianduaga/eloquent-external-storage repo).
 - [Amazon S3 testing in Travis CI](http://milesj.me/blog/read/amazon-s3-testing-travis-ci)
 
@@ -140,4 +140,7 @@ Both options have the ability to generate a code coverage report in different fo
 
 [dependency-status-url]: https://gemnasium.com/inakianduaga/eloquent-external-storage
 [dependency-status-image]: https://gemnasium.com/inakianduaga/eloquent-external-storage.svg
+
+[hhvm-status-url]: http://hhvm.h4cc.de/package/inakianduaga/eloquent-external-storage
+[hhvm-status-image]: http://hhvm.h4cc.de/badge/inakianduaga/eloquent-external-storage.svg
 

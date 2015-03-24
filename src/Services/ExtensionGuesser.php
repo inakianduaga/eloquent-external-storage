@@ -23,7 +23,8 @@ class ExtensionGuesser {
     public function guess($string)
     {
         //Convert string to temp file, and recover its path
-        $tempFile = tmpfile();
+        //We can't use tmpfile because of hhvm implementation: https://github.com/facebook/hhvm/issues/2336
+        $tempFile = fopen(tempnam(sys_get_temp_dir(), 'eloquent_ext_storage_'), 'w');
         fwrite($tempFile, $string);
         $tempPath = $this->getPathFromFileHandler($tempFile);
 
