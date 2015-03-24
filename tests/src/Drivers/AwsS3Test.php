@@ -32,6 +32,11 @@ class AwsS3Test extends BaseTestCase {
     {
         parent::setUp();
 
+        //If AWS environment variables are not set, abort tests
+        if(!$this->hasAwsCredentials()) {
+            $this->markTestIncomplete('No AWS credentials set or incomplete, skipping AWS S3 Driver test suite.');
+        }
+
         $this->refreshDriver();
 
         $this->content = $this->generateRandomContent();
@@ -87,11 +92,36 @@ class AwsS3Test extends BaseTestCase {
         $this->storageDriver->setConfigKey('mocked.config.key');
     }
 
+    /**
+     * @return string
+     */
     private function generateRandomContent()
     {
         return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
     }
 
+    /**
+     * Checks whether the AWS credentials are set (doesn't check their validity though)
+     * @return bool
+     */
+    private function hasAwsCredentials()
+    {
+        $mustBeNonEmpty = array(
+            'AWS_S3_KEY',
+            'AWS_S3_SECRET',
+            'AWS_S3_REGION',
+            'AWS_S3_BUCKET',
+            'AWS_S3_BUCKET_SUBFOLDER'
+        );
+
+        foreach($mustBeNonEmpty as $envVar) {
+            if(empty(getenv($envVar))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 }
 

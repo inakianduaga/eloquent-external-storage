@@ -116,7 +116,7 @@ Both options have the ability to generate a code coverage report in different fo
 
 ### Testing AWS S3 Driver
 
-- **Locally:** Valid AWS S3 credentials need to be provided via `tests/.env` file, see `tests/.env.example` as an example.
+- **Locally:** Valid AWS S3 credentials can be provided via `tests/.env` file, see `tests/.env.example` as an example. If no credentials are set, the AWS S3 tests will be skipped
 - **CI**: Travis CI integration is performed by passing encrypted credentials in travis.yml (valid only for inakianduaga/eloquent-external-storage repo).
 - [Amazon S3 testing in Travis CI](http://milesj.me/blog/read/amazon-s3-testing-travis-ci)
 
