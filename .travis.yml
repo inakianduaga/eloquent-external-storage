@@ -7,7 +7,6 @@ php:
   # aliased to a recent 5.5.x version
   - 5.5
   - hhvm
-  - hhvm-nightly
 
 # Update: We no force hhvm compatibility
 #matrix:
